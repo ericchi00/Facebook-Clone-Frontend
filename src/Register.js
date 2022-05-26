@@ -35,9 +35,13 @@ const Register = ({ show, onHide, setModalShow }) => {
 					validationSchema={Yup.object({
 						firstName: Yup.string()
 							.max(15, 'Must be 15 characters or less')
+							.trim()
+							.matches(/^[a-zA-Z]+$/, 'Only letters allowed')
 							.required('First name required'),
 						lastName: Yup.string()
 							.max(20, 'Must be 20 characters or less')
+							.trim()
+							.matches(/^[a-zA-Z]+$/, 'Only letters allowed')
 							.required('Last name required'),
 						email: Yup.string()
 							.email('Invalid email address')
@@ -54,11 +58,12 @@ const Register = ({ show, onHide, setModalShow }) => {
 							body: JSON.stringify(values),
 						});
 						const message = await registerPost.json();
-						if (message === 'success') {
+						if (registerPost.status === 201) {
 							setRegisterSuccess(true);
 							setTimeout(() => {
 								setModalShow(false);
 								setRegisterSuccess(false);
+								setErrors(null);
 							}, 1100);
 						} else {
 							setErrors(message.errors);
