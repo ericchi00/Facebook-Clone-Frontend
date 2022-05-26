@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 
 const Footer = () => {
 	return (
-		<Navbar bg="dark" variant="dark" style={{ height: 'auto' }}>
+		<Navbar bg="dark" variant="dark" style={{ marginTop: 'auto' }}>
 			<Container fluid className="justify-content-center">
 				<Navbar.Text>Built by Eric Chi.</Navbar.Text>
 				<Nav.Link href="">Backend API</Nav.Link>
