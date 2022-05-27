@@ -58,16 +58,16 @@ const Register = ({ show, onHide, setModalShow }) => {
 							body: JSON.stringify(values),
 						});
 						const message = await registerPost.json();
-						if (registerPost.status === 201) {
+						if ('errors' in message) {
+							setErrors(message.errors);
+							setShowError(true);
+						} else {
 							setRegisterSuccess(true);
 							setTimeout(() => {
 								setModalShow(false);
 								setRegisterSuccess(false);
 								setErrors(null);
 							}, 1100);
-						} else {
-							setErrors(message.errors);
-							setShowError(true);
 						}
 						setSubmitting(false);
 					}}
