@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { RequireAuth, useIsAuthenticated } from 'react-auth-kit';
 import Header from '../Authenticated/Header';
 import Home from '../Authenticated/Home';
-import Profile from '../Authenticated/Profile';
+import Profile from '../Authenticated/Profile/Profile';
 import Footer from '../components/Footer';
 import ErrorPage from '../components/ErrorPage';
 
