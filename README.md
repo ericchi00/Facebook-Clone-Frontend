@@ -12,3 +12,9 @@ HTML, React-Bootstrap, React, Formik (form valiidation), Yup (schema validation)
 
 
 ## Features
+
+## Icons
+
+Icons are from [Bootstrap Icons](https://icons.getbootstrap.com/)
+
+They are free and open source. Thanks Bootstrap!
