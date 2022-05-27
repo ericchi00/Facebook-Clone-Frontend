@@ -18,8 +18,9 @@ const Login = () => {
 	return (
 		<>
 			<Container
-				fluid
-				className="d-flex flex-column vh-100 justify-content-center align-items-center bg-light"
+				fluid="md"
+				className="d-flex flex-column align-items-center"
+				style={{ marginTop: 'auto', marginBottom: 'auto' }}
 			>
 				<h2>Facebook Clone</h2>
 				<Formik
