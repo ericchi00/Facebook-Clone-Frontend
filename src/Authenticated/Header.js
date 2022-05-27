@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import icon from '../assets/facebook.svg';
+import { ReactComponent as FaceBookIcon } from '../assets/facebook.svg';
 
 const Header = () => {
 	const auth = useAuthUser();
@@ -18,15 +18,11 @@ const Header = () => {
 	return (
 		<Navbar bg="dark" className="w-100">
 			<Container fluid>
-				<Navbar.Brand as={Link} to="/" style={{ color: '#fff' }}>
-					<img
-						src={icon}
-						alt="Bootstrap FaceBook Icon"
-						className="pe-2"
-						width="30"
-						height="30"
-					/>{' '}
-					Facebook Clone
+				<Navbar.Brand as={Link} to="/" style={{ color: '#fff', gap: '.5rem' }}>
+					<FaceBookIcon />
+					<Navbar.Text style={{ paddingLeft: '1rem', color: '#fff' }}>
+						Facebook Clone
+					</Navbar.Text>
 				</Navbar.Brand>
 				<Nav className="me-auto"></Nav>
 				<Navbar.Text style={{ color: '#fff', paddingRight: '1rem' }}>
