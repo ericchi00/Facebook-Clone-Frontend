@@ -65,6 +65,7 @@ const Login = () => {
 					<Form
 						className="border p-5 rounded border-3 d-flex flex-column"
 						style={{ background: '#fff' }}
+						data-testid="login-form"
 					>
 						<BootstrapForm.Group className="mb-3 w-auto">
 							<InputField
