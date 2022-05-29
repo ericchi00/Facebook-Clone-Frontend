@@ -34,8 +34,8 @@ const Header = () => {
 				<Button
 					variant="light"
 					onClick={() => {
-						signOut();
 						navigate('/');
+						signOut();
 					}}
 				>
 					Logout
