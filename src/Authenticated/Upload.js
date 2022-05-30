@@ -16,9 +16,10 @@ const bucket = new AWS.S3({
 	region: process.env.REACT_APP_REGION,
 });
 
-const Upload = ({ buttonName, setEditPicture, label }) => {
+const Upload = ({ buttonName, setEditPicture, label, setLoading }) => {
 	const [file, setFile] = useState();
 	const [disabled, setDisabled] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 	const [showError, setShowError] = useState(false);
 
 	const authHeader = useAuthHeader();
@@ -27,7 +28,13 @@ const Upload = ({ buttonName, setEditPicture, label }) => {
 	useEffect(() => {
 		if (file) {
 			if (file.type === 'image/png' || file.type === 'image/jpeg') {
-				return setDisabled(false);
+				setDisabled(false);
+			}
+			if (file.size > 10e6) {
+				setErrorMessage('Image is too big.');
+				setShowError(true);
+				setDisabled(false);
+				return;
 			}
 		}
 		setDisabled(true);
@@ -62,17 +69,27 @@ const Upload = ({ buttonName, setEditPicture, label }) => {
 
 		if (putUserPicture.status !== 200) {
 			console.error(new Error('An error has occurred while uploading'));
+			setErrorMessage('An error occurred while uploading. Please try again.');
 			setShowError(true);
 		}
 
+		// update picture link in localStorage
+		const authState = JSON.parse(localStorage.getItem('_auth_state'));
+		authState['picture'] = s3URL;
+		localStorage.setItem('_auth_state', JSON.stringify(authState));
+
 		// closes profile picture form
-		setEditPicture(false);
+		// set timeout as if it loads too fast picture doesn't update
+		setTimeout(() => {
+			setEditPicture(false);
+			setLoading(true);
+		}, 1000);
 	};
 
 	return (
 		<Form className="w-75">
 			<Form.Group className="mb-3" controlId="uploadProfilePicture">
-				<Form.Label>{label}</Form.Label>
+				<Form.Label className="text-light">{label}</Form.Label>
 				<input
 					className="form-control"
 					name="picture"
@@ -85,20 +102,18 @@ const Upload = ({ buttonName, setEditPicture, label }) => {
 				/>
 				<Form.Text className="text-muted">.PNG OR JPEG ONLY</Form.Text>
 			</Form.Group>
-			{showError && (
-				<Alert variant="danger">Error whle uploading. Please try again.</Alert>
-			)}
+			{showError && <Alert variant="danger">{errorMessage}</Alert>}
 			<div className="d-flex justify-content-center" style={{ gap: '1rem' }}>
 				<Button
-					variant="outline-primary"
+					variant="primary"
 					type="button"
 					onClick={() => uploadFile()}
 					disabled={disabled}
 				>
 					{buttonName}
 				</Button>
-				<Button variant="outline-danger" onClick={() => setEditPicture(false)}>
-					Cancel Update
+				<Button variant="danger" onClick={() => setEditPicture(false)}>
+					Cancel
 				</Button>
 			</div>
 		</Form>
