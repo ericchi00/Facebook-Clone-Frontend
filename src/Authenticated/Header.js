@@ -15,7 +15,7 @@ const Header = ({ auth }) => {
 	const signOut = useSignOut();
 
 	return (
-		<Navbar bg="dark" className="w-100">
+		<Navbar className="w-100" style={{ background: '#30475E' }}>
 			<Container fluid>
 				<Navbar.Brand as={Link} to="/" style={{ color: '#fff', gap: '.5rem' }}>
 					<FaceBookIcon />

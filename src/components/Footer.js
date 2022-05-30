@@ -6,11 +6,11 @@ import { ReactComponent as Github } from '../assets/github.svg';
 
 const Footer = () => {
 	return (
-		<Navbar bg="dark" variant="dark" className="w-100" fixed="bottom">
+		<Navbar className="w-100" fixed="bottom" style={{ background: '#323232' }}>
 			<Container
 				fluid
 				className="justify-content-center"
-				style={{ color: '#fff' }}
+				style={{ color: 'white' }}
 			>
 				<Github />
 				<Nav.Link
