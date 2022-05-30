@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container';
 import { Formik, Form } from 'formik';
 import { useSignIn } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
-import InputField from './components/InputField';
+import InputField from './InputField';
 import Register from './Register';
 import * as Yup from 'yup';
 
@@ -22,7 +22,7 @@ const Login = () => {
 				className="d-flex flex-column align-items-center"
 				style={{ marginTop: 'auto', marginBottom: 'auto' }}
 			>
-				<h2>Facebook Clone</h2>
+				<h2 className="text-light">Facebook Clone</h2>
 				<Formik
 					initialValues={{
 						email: '',
@@ -63,13 +63,13 @@ const Login = () => {
 					}}
 				>
 					<Form
-						className="border p-5 rounded border-3 d-flex flex-column"
-						style={{ background: '#fff' }}
+						className="p-5 rounded d-flex flex-column"
+						style={{ background: '#323232' }}
 						data-testid="login-form"
 					>
 						<BootstrapForm.Group className="mb-3 w-auto">
 							<InputField
-								label="Email*"
+								label="Email"
 								name="email"
 								type="email"
 								className="form-control"
@@ -77,7 +77,7 @@ const Login = () => {
 						</BootstrapForm.Group>
 						<BootstrapForm.Group className="mb-3">
 							<InputField
-								label="Password*"
+								label="Password"
 								name="password"
 								type="password"
 								className="form-control"

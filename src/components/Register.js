@@ -6,7 +6,7 @@ import Alert from 'react-bootstrap/Alert';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
-import InputField from './components/InputField';
+import InputField from './InputField';
 
 const Register = ({ show, onHide, setModalShow }) => {
 	const [errors, setErrors] = useState(null);
@@ -21,10 +21,12 @@ const Register = ({ show, onHide, setModalShow }) => {
 			aria-labelledby="contained-modal-title-vcenter"
 			centered
 		>
-			<Modal.Header closeButton>
-				<Modal.Title id="contained-modal-title-vcenter">Sign up</Modal.Title>
+			<Modal.Header style={{ background: '#323232' }} closeButton>
+				<Modal.Title id="contained-modal-title-vcenter" className="text-light">
+					Sign up
+				</Modal.Title>
 			</Modal.Header>
-			<Modal.Body>
+			<Modal.Body style={{ background: '#323232' }}>
 				<Formik
 					initialValues={{
 						firstName: '',
@@ -72,7 +74,7 @@ const Register = ({ show, onHide, setModalShow }) => {
 						setSubmitting(false);
 					}}
 				>
-					<Form>
+					<Form style={{ background: '#323232' }}>
 						<BootstrapForm.Group className="mb-1">
 							<InputField
 								label="Email*"
