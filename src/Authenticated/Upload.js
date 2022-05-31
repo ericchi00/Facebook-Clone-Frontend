@@ -26,20 +26,27 @@ const Upload = ({ buttonName, setEditPicture, label, setLoading }) => {
 	const auth = useAuthUser();
 
 	useEffect(() => {
+		checkFile();
+	}, [file]);
+
+	const checkFile = () => {
+		setShowError(false);
+		setErrorMessage('');
+		setDisabled(true);
 		if (file) {
 			if (file.type === 'image/png' || file.type === 'image/jpeg') {
 				setDisabled(false);
-			}
-			if (file.size > 10e6) {
-				setErrorMessage('Image is too big.');
+				return;
+			} else if (file.size > 10e6) {
+				setErrorMessage('File size is too big');
 				setShowError(true);
-				setDisabled(false);
+				setDisabled(true);
 				return;
 			}
+			setErrorMessage('File must be png or jpeg.');
+			setShowError(true);
 		}
-		setDisabled(true);
-		setShowError(false);
-	}, [file]);
+	};
 
 	const uploadFile = async () => {
 		const randomFileName = uuidv4();
@@ -58,7 +65,7 @@ const Upload = ({ buttonName, setEditPicture, label, setLoading }) => {
 
 		const s3URL = process.env.REACT_APP_S3_URL + randomFileName;
 
-		const putUserPicture = await fetch(`/users/profile/picture/${auth().id}`, {
+		const putUserPicture = await fetch(`/api/profile/picture/${auth().id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
