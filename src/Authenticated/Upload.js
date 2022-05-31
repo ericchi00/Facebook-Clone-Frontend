@@ -16,7 +16,7 @@ const bucket = new AWS.S3({
 	region: process.env.REACT_APP_REGION,
 });
 
-const Upload = ({ buttonName, setEditPicture, label, setLoading }) => {
+const Upload = ({ buttonName, setEditPicture, label, setProfileChange }) => {
 	const [file, setFile] = useState();
 	const [disabled, setDisabled] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
@@ -89,8 +89,8 @@ const Upload = ({ buttonName, setEditPicture, label, setLoading }) => {
 		// set timeout as if it loads too fast picture doesn't update
 		setTimeout(() => {
 			setEditPicture(false);
-			setLoading(true);
-		}, 1000);
+			setProfileChange(true);
+		}, 1500);
 	};
 
 	return (
