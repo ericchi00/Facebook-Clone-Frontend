@@ -54,7 +54,7 @@ const Register = ({ show, onHide, setModalShow }) => {
 							.required('Password is required'),
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
-						const registerPost = await fetch('/users/register', {
+						const registerPost = await fetch('/auth/register', {
 							method: 'POST',
 							headers: { 'Content-Type': 'application/json' },
 							body: JSON.stringify(values),

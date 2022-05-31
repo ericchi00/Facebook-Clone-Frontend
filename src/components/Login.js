@@ -5,7 +5,6 @@ import { Form as BootstrapForm } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { Formik, Form } from 'formik';
 import { useSignIn } from 'react-auth-kit';
-import { useNavigate } from 'react-router-dom';
 import InputField from './InputField';
 import Register from './Register';
 import * as Yup from 'yup';
@@ -13,14 +12,13 @@ import * as Yup from 'yup';
 const Login = () => {
 	const [error, setError] = useState(false);
 	const [modalShow, setModalShow] = useState(false);
-	const navigate = useNavigate();
 	const signIn = useSignIn();
 	return (
 		<>
 			<Container
 				fluid="md"
-				className="d-flex flex-column align-items-center"
-				style={{ marginTop: 'auto', marginBottom: 'auto' }}
+				className="d-flex flex-column align-items-center justify-content-center"
+				style={{ height: '100%' }}
 			>
 				<h2 className="text-light">Facebook Clone</h2>
 				<Formik
@@ -38,7 +36,7 @@ const Login = () => {
 							.required('Password is required'),
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
-						const loginPost = await fetch('/users/login', {
+						const loginPost = await fetch('/auth/login', {
 							method: 'POST',
 							headers: {
 								'Content-Type': 'application/json',
@@ -57,7 +55,6 @@ const Login = () => {
 								authState: message.authState,
 							})
 						) {
-							// navigate('/');
 						}
 						setSubmitting(false);
 					}}
