@@ -8,7 +8,7 @@ import InputField from '../../components/InputField';
 import { useAuthUser, useAuthHeader, useSignIn } from 'react-auth-kit';
 import { useParams } from 'react-router-dom';
 
-const ProfileForm = ({ setEditProfile }) => {
+const ProfileForm = ({ setLoading, setEditProfile }) => {
 	const { id } = useParams();
 	const [error, setError] = useState(false);
 
@@ -45,7 +45,7 @@ const ProfileForm = ({ setEditProfile }) => {
 					.required('Password is required'),
 			})}
 			onSubmit={async (values, { setSubmitting }) => {
-				const putUserInfo = await fetch(`/users/profile/${id}`, {
+				const putUserInfo = await fetch(`/api/profile/${id}`, {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',
@@ -68,6 +68,7 @@ const ProfileForm = ({ setEditProfile }) => {
 						})
 					) {
 						setEditProfile(false);
+						setLoading(true);
 					} else {
 						const error = new Error('An error has occurred.');
 						console.error(error);
