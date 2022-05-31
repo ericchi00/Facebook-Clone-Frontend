@@ -7,7 +7,11 @@ const ErrorPage = () => {
 	document.title = 'Error 404';
 
 	return (
-		<Container fluid className="d-flex mt-5 pt-5 justify-content-center">
+		<Container
+			fluid
+			className="d-flex justify-content-center"
+			style={{ paddingTop: '6rem' }}
+		>
 			<div className="text-center text-light">
 				<h1 className="display-1 fw-bold text-light">404</h1>
 				<p className="fs-3">
