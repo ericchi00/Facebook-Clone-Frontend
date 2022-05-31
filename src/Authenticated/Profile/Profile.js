@@ -1,23 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useAuthHeader, useAuthUser } from 'react-auth-kit';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import ProfileForm from './ProfileForm';
 import Upload from '../Upload';
-import Post from '../Post';
+import PostForm from '../PostForm';
 import { ReactComponent as AddFriend } from '../../assets/addfriend.svg';
 import { ReactComponent as RemoveFriend } from '../../assets/removefriend.svg';
+import { ReactComponent as FriendsList } from '../../assets/friendslist.svg';
 
 const Profile = ({ auth, authHeader }) => {
+	document.title = auth().firstName + ' ' + auth().lastName;
 	const { id } = useParams();
 	const [info, setInfo] = useState(null);
 	const [loading, setLoading] = useState(true);
-	const [isUserProfile, setIsUserProfile] = useState(false);
 	const [editProfile, setEditProfile] = useState(false);
 	const [editPicture, setEditPicture] = useState(false);
+	const [isUserProfile, setIsUserProfile] = useState(false);
+	const [isFriend, setIsFriend] = useState(false);
+	const [friendRequest, setFriendRequest] = useState(null);
 
 	const navigate = useNavigate();
 
@@ -28,7 +31,7 @@ const Profile = ({ auth, authHeader }) => {
 		} else {
 			setIsUserProfile(false);
 		}
-	}, [id, editProfile, editPicture]);
+	}, [id, loading]);
 
 	const getInfo = async () => {
 		const response = await fetch(`/api/profile/${id}`, {
@@ -39,12 +42,44 @@ const Profile = ({ auth, authHeader }) => {
 			},
 		});
 		if (response.status === 500) {
-			navigate('*');
+			return navigate('*');
 		}
 		const profileInfo = await response.json();
 		setInfo(profileInfo);
-		document.title = profileInfo.firstName + ' ' + profileInfo.lastName;
+		if (profileInfo.friendRequest.includes(auth().id)) {
+			setFriendRequest(true);
+		}
+
 		setLoading(false);
+	};
+
+	const sendFriendRequest = async () => {
+		const putFriend = await fetch(`/api/friends/request`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ user: auth().id, friend: id }),
+		});
+		if (putFriend.status === 200) {
+			setFriendRequest(true);
+		}
+	};
+
+	const deleteFriendRequest = async () => {
+		const deleteFriend = await fetch('/api/friends/request', {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ user: auth().id, friend: id }),
+		});
+
+		if (deleteFriend.status === 200) {
+			setFriendRequest(false);
+		}
 	};
 
 	return (
@@ -55,6 +90,7 @@ const Profile = ({ auth, authHeader }) => {
 			{loading ? (
 				<Spinner
 					animation="border"
+					variant="light"
 					role="status"
 					style={{
 						width: '4rem',
@@ -67,13 +103,18 @@ const Profile = ({ auth, authHeader }) => {
 			) : (
 				<Card
 					className="d-flex flex-column align-items-center p-3"
-					style={{ width: '600px' }}
+					style={{ width: '600px', background: '#323232' }}
 				>
-					{editProfile && <ProfileForm setEditProfile={setEditProfile} />}
+					{editProfile && (
+						<ProfileForm
+							setLoading={setLoading}
+							setEditProfile={setEditProfile}
+						/>
+					)}
 					{editPicture && (
 						<Upload
 							label="Profile Picture"
-							buttonName="Save Profile Picture"
+							buttonName="Save"
 							setLoading={setLoading}
 							setEditPicture={setEditPicture}
 						/>
@@ -87,22 +128,39 @@ const Profile = ({ auth, authHeader }) => {
 								height="150"
 								className="rounded-circle pe-auto"
 							/>
-							<Card.Title className="p-3">
+							<Card.Title className="p-3 text-light">
 								{info.firstName + ' ' + info.lastName}
 							</Card.Title>
-							<div className="d-flex" style={{ gap: '1rem' }}>
-								<Button variant="dark" onClick={() => setEditProfile(true)}>
-									Edit Profile
+							{isUserProfile && (
+								<div className="d-flex" style={{ gap: '1rem' }}>
+									<Button variant="light" onClick={() => setEditProfile(true)}>
+										Edit Profile
+									</Button>
+									<Button variant="light" onClick={() => setEditPicture(true)}>
+										Edit Picture
+									</Button>
+								</div>
+							)}
+							{!isUserProfile && isFriend && (
+								<Button variant="light">
+									<RemoveFriend /> Remove Friend
 								</Button>
-								<Button variant="dark" onClick={() => setEditPicture(true)}>
-									Edit Picture
+							)}
+							{!isUserProfile && friendRequest && (
+								<Button variant="danger" onClick={() => deleteFriendRequest()}>
+									<RemoveFriend /> Remove Friend Request
 								</Button>
-							</div>
+							)}
+							{!isUserProfile && !friendRequest && (
+								<Button variant="primary" onClick={() => sendFriendRequest()}>
+									<AddFriend /> Send Friend Request
+								</Button>
+							)}
 						</>
 					) : null}
 				</Card>
 			)}
-			<Post />
+			<PostForm auth={auth} />
 		</Container>
 	);
 };
