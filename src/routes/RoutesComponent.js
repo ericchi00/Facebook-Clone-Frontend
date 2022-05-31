@@ -20,9 +20,7 @@ const RoutesComponent = () => {
 	return (
 		<>
 			<BrowserRouter basename="/facebook-clone-frontend">
-				{isAuthenticated() ? (
-					<Header auth={auth} authHeader={authHeader} />
-				) : null}
+				{isAuthenticated() && <Header auth={auth} authHeader={authHeader} />}
 				<Routes>
 					<Route
 						path="/"
