@@ -16,7 +16,7 @@ const Login = () => {
 	return (
 		<>
 			<Container
-				fluid="md"
+				fluid
 				className="d-flex flex-column align-items-center justify-content-center"
 				style={{ margin: 'auto 0' }}
 			>
