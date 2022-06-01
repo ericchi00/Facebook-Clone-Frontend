@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import PostForm from '../PostForm';
 import FriendRequest from './FriendRequest';
+import FriendsList from './FriendsList';
 import ProfileCard from './ProfileCard';
 
 const Profile = ({ auth, authHeader }) => {
@@ -12,6 +13,7 @@ const Profile = ({ auth, authHeader }) => {
 	const [loading, setLoading] = useState(true);
 	const [isUserProfile, setIsUserProfile] = useState(false);
 	const [profileChange, setProfileChange] = useState(false);
+	const [friendsUpdate, setFriendsUpdate] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -68,10 +70,19 @@ const Profile = ({ auth, authHeader }) => {
 						id={id}
 						setProfileChange={setProfileChange}
 					/>
-					{isUserProfile && <PostForm auth={auth} />}
 					{isUserProfile && (
-						<FriendRequest auth={auth} authHeader={authHeader} />
+						<FriendRequest
+							auth={auth}
+							authHeader={authHeader}
+							setFriendsUpdate={setFriendsUpdate}
+						/>
 					)}
+					<FriendsList
+						id={id}
+						authHeader={authHeader}
+						isUserProfile={isUserProfile}
+						friendsUpdate={friendsUpdate}
+					/>
 				</>
 			)}
 		</>
