@@ -94,12 +94,11 @@ const ProfileCard = ({
 				{editPicture && (
 					<Upload
 						label="Profile Picture"
-						buttonName="Save"
 						setProfileChange={setProfileChange}
 						setEditPicture={setEditPicture}
 					/>
 				)}
-				{!editPicture && !editProfile ? (
+				{!editPicture && !editProfile && (
 					<>
 						<img
 							alt="Profile"
@@ -162,7 +161,7 @@ const ProfileCard = ({
 							</Button>
 						)}
 					</>
-				) : null}
+				)}
 			</Card>
 		</Container>
 	);
