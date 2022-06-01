@@ -15,6 +15,7 @@ const FriendRequest = ({
 	const [rerender, setRerender] = useState(false);
 
 	useEffect(() => {
+		setRerender(false);
 		getFriendRequest();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [rerender]);
@@ -81,17 +82,23 @@ const FriendRequest = ({
 										style={{ background: '#404040', width: '280px' }}
 									>
 										<Button
+											variant="dark"
 											as={Link}
 											to={`/profile/${request._id}`}
-											className="d-flex p-2 text-light justify-content-between
-										align-items-center"
+											className="d-flex p-2 text-light"
 											style={{
 												background: '#404040',
-												width: '280px',
 												gap: '.5rem',
 												border: 'none',
 											}}
 										>
+											<img
+												src={request.picture}
+												alt={request.firstName + ' profile picture'}
+												width={24}
+												height={24}
+												className="rounded-circle pe-auto"
+											/>
 											{request.firstName + ' ' + request.lastName}
 										</Button>
 										<div className="d-flex" style={{ gap: '.3rem' }}>
