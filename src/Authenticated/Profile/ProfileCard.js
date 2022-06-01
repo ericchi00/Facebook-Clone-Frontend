@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { ReactComponent as AddFriend } from '../../assets/addfriend.svg';
 import { ReactComponent as RemoveFriend } from '../../assets/removefriend.svg';
 import { ReactComponent as ProfilePic } from '../../assets/profilepic.svg';
@@ -14,8 +15,8 @@ const ProfileCard = ({
 	authHeader,
 	isUserProfile,
 	info,
-	id,
 	setProfileChange,
+	id,
 }) => {
 	const [editProfile, setEditProfile] = useState(false);
 	const [editPicture, setEditPicture] = useState(false);
@@ -31,7 +32,7 @@ const ProfileCard = ({
 				setIsFriend(true);
 			}
 		}
-	}, [id]);
+	}, [id, isUserProfile]);
 
 	const sendFriendRequest = async () => {
 		const putFriend = await fetch(`/api/friends/request`, {
