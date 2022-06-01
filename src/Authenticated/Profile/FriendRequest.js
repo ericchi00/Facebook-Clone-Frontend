@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Accept } from '../../assets/accept.svg';
 import { ReactComponent as Decline } from '../../assets/decline.svg';
 
-const FriendRequest = ({ auth, authHeader, deleteFriendRequest }) => {
+const FriendRequest = ({
+	auth,
+	authHeader,
+	deleteFriendRequest,
+	setFriendsUpdate,
+}) => {
 	const [friendRequestList, setFriendRequestList] = useState([]);
 	const [rerender, setRerender] = useState(false);
 
 	useEffect(() => {
 		getFriendRequest();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [rerender]);
 
 	const getFriendRequest = async () => {
@@ -35,6 +42,7 @@ const FriendRequest = ({ auth, authHeader, deleteFriendRequest }) => {
 		});
 		if (putFriend.status === 200) {
 			setRerender(true);
+			setFriendsUpdate(true);
 		}
 	};
 
@@ -47,7 +55,7 @@ const FriendRequest = ({ auth, authHeader, deleteFriendRequest }) => {
 			},
 			body: JSON.stringify({ user: auth().id, friend: friendID }),
 		});
-		setRerender(true);
+		if (deleteFriendRequest.status === 200) setRerender(true);
 	};
 
 	return (
@@ -62,7 +70,7 @@ const FriendRequest = ({ auth, authHeader, deleteFriendRequest }) => {
 					<div className="w-100 h-100 p-3" style={{ background: '#323232' }}>
 						<h5 className="text-center text-light">Friend Requests</h5>
 						<div
-							className="d-flex justify-content-center"
+							className="d-flex flex-wrap justify-content-around"
 							style={{ gap: '.8rem' }}
 						>
 							{friendRequestList.map((request, i) => {
@@ -72,7 +80,20 @@ const FriendRequest = ({ auth, authHeader, deleteFriendRequest }) => {
 										className="d-flex p-2 text-light justify-content-between align-items-center"
 										style={{ background: '#404040', width: '280px' }}
 									>
-										{request.firstName + ' ' + request.lastName}
+										<Button
+											as={Link}
+											to={`/profile/${request._id}`}
+											className="d-flex p-2 text-light justify-content-between
+										align-items-center"
+											style={{
+												background: '#404040',
+												width: '280px',
+												gap: '.5rem',
+												border: 'none',
+											}}
+										>
+											{request.firstName + ' ' + request.lastName}
+										</Button>
 										<div className="d-flex" style={{ gap: '.3rem' }}>
 											<Accept
 												onClick={() => acceptFriendRequest(request._id)}
