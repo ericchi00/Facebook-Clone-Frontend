@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 
-const FriendsList = ({ id, authHeader, friendsUpdate }) => {
+const FriendsList = ({ id, authHeader, friendsUpdate, setFriendsUpdate }) => {
 	const [friends, setFriends] = useState([]);
 
 	const getFriends = async () => {
@@ -21,6 +21,7 @@ const FriendsList = ({ id, authHeader, friendsUpdate }) => {
 	};
 
 	useEffect(() => {
+		setFriendsUpdate(false);
 		getFriends();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id, friendsUpdate]);
