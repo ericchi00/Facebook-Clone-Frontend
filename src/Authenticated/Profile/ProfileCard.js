@@ -19,7 +19,7 @@ const ProfileCard = ({
 }) => {
 	const [editProfile, setEditProfile] = useState(false);
 	const [editPicture, setEditPicture] = useState(false);
-	const [isFriend, setIsFriend] = useState(false);
+	const [isFriend, setIsFriend] = useState(null);
 	const [friendRequest, setFriendRequest] = useState(null);
 
 	useEffect(() => {
@@ -31,7 +31,7 @@ const ProfileCard = ({
 				setIsFriend(true);
 			}
 		}
-	}, [isFriend, friendRequest]);
+	}, [id]);
 
 	const sendFriendRequest = async () => {
 		const putFriend = await fetch(`/api/friends/request`, {
