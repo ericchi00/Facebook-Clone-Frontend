@@ -63,7 +63,6 @@ const Profile = ({ auth, authHeader }) => {
 					<ProfileCard
 						auth={auth}
 						authHeader={authHeader}
-						setLoading={setLoading}
 						isUserProfile={isUserProfile}
 						info={info}
 						id={id}
