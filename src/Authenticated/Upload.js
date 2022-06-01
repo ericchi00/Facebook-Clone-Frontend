@@ -4,6 +4,7 @@ import AWS from 'aws-sdk';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
+import Spinner from 'react-bootstrap/Spinner';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
 
 AWS.config.update({
@@ -19,6 +20,7 @@ const bucket = new AWS.S3({
 const Upload = ({ buttonName, setEditPicture, label, setProfileChange }) => {
 	const [file, setFile] = useState();
 	const [disabled, setDisabled] = useState(false);
+	const [loading, setLoading] = useState(false);
 	const [errorMessage, setErrorMessage] = useState('');
 	const [showError, setShowError] = useState(false);
 
@@ -48,7 +50,7 @@ const Upload = ({ buttonName, setEditPicture, label, setProfileChange }) => {
 		}
 	};
 
-	const uploadFile = async () => {
+	const uploadProfilePicture = async () => {
 		const randomFileName = uuidv4();
 		const params = {
 			Body: file,
@@ -85,12 +87,12 @@ const Upload = ({ buttonName, setEditPicture, label, setProfileChange }) => {
 		authState['picture'] = s3URL;
 		localStorage.setItem('_auth_state', JSON.stringify(authState));
 
-		// closes profile picture form
-		// set timeout as if it loads too fast picture doesn't update
+		setDisabled(true);
+		setLoading(true);
+		// set timeout as picture won't update if page is reloaded instantly
 		setTimeout(() => {
-			setEditPicture(false);
-			setProfileChange(true);
-		}, 1500);
+			window.location.reload();
+		}, 2000);
 	};
 
 	return (
@@ -114,10 +116,23 @@ const Upload = ({ buttonName, setEditPicture, label, setProfileChange }) => {
 				<Button
 					variant="primary"
 					type="button"
-					onClick={() => uploadFile()}
+					onClick={() => uploadProfilePicture()}
 					disabled={disabled}
 				>
-					{buttonName}
+					{loading ? (
+						<>
+							<Spinner
+								as="span"
+								animation="grow"
+								size="sm"
+								role="status"
+								aria-hidden="true"
+							/>
+							Loading...
+						</>
+					) : (
+						'Save'
+					)}
 				</Button>
 				<Button variant="danger" onClick={() => setEditPicture(false)}>
 					Cancel
