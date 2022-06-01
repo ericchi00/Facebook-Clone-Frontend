@@ -8,7 +8,7 @@ import InputField from '../../components/InputField';
 import { useAuthUser, useAuthHeader, useSignIn } from 'react-auth-kit';
 import { useParams } from 'react-router-dom';
 
-const ProfileForm = ({ setSubmitChanges, setEditProfile }) => {
+const ProfileForm = ({ setProfileChange, setEditProfile }) => {
 	const { id } = useParams();
 	const [error, setError] = useState(false);
 
@@ -68,7 +68,7 @@ const ProfileForm = ({ setSubmitChanges, setEditProfile }) => {
 						})
 					) {
 						setEditProfile(false);
-						setSubmitChanges(true);
+						setProfileChange(true);
 					} else {
 						const error = new Error('An error has occurred.');
 						console.error(error);
