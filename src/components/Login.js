@@ -18,7 +18,7 @@ const Login = () => {
 			<Container
 				fluid="md"
 				className="d-flex flex-column align-items-center justify-content-center"
-				style={{ marginTop: 'auto' }}
+				style={{ margin: 'auto 0' }}
 			>
 				<h2 className="text-light">Facebook Clone</h2>
 				<Formik
