@@ -1,17 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSignOut } from 'react-auth-kit';
 import { Link, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Badge from 'react-bootstrap/Badge';
 import { ReactComponent as Profile } from '../assets/profile.svg';
 import { ReactComponent as FaceBookIcon } from '../assets/facebook.svg';
 
-const Header = ({ auth }) => {
+const Header = ({ auth, authHeader }) => {
+	const [friendRequests, setFriendRequests] = useState(0);
 	const fullName = auth().firstName + ' ' + auth().lastName;
 	const id = auth().id;
 	const navigate = useNavigate();
 	const signOut = useSignOut();
+
+	const getFriendRequest = async () => {
+		const getFriendReq = await fetch(`/api/friends/request/${auth().id}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+		});
+
+		if (getFriendReq.status === 200) {
+			const response = await getFriendReq.json();
+			setFriendRequests(response.friendRequest.length);
+		}
+	};
+
+	useEffect(() => {
+		getFriendRequest();
+	});
 
 	return (
 		<Navbar style={{ background: '#30475E' }}>
@@ -23,7 +44,18 @@ const Header = ({ auth }) => {
 					</Navbar.Text>
 				</Navbar.Brand>
 				<NavDropdown
-					title={<Profile />}
+					title={
+						friendRequests > 0 ? (
+							<>
+								<Profile />
+								<Badge bg="dark" className="ps-2">
+									{friendRequests}
+								</Badge>
+							</>
+						) : (
+							<Profile />
+						)
+					}
 					id="nav-dropdown-settings"
 					menuVariant="dark"
 					align="end"
@@ -46,7 +78,9 @@ const Header = ({ auth }) => {
 							<small>See your profile</small>
 						</div>
 					</NavDropdown.Item>
-					<NavDropdown.Item>Friends</NavDropdown.Item>
+					<NavDropdown.Item>
+						Friend Requests <Badge bg="dark">{friendRequests}</Badge>
+					</NavDropdown.Item>
 					<NavDropdown.Item>Messages</NavDropdown.Item>
 					<NavDropdown.Item
 						className="w-auto"
