@@ -29,6 +29,7 @@ const Upload = ({ buttonName, setEditPicture, label, setProfileChange }) => {
 
 	useEffect(() => {
 		checkFile();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [file]);
 
 	const checkFile = () => {
