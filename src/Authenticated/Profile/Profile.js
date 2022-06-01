@@ -18,6 +18,7 @@ const Profile = ({ auth, authHeader }) => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		setLoading(true);
 		if (id === auth().id) {
 			setIsUserProfile(true);
 		} else {
@@ -72,6 +73,7 @@ const Profile = ({ auth, authHeader }) => {
 					/>
 					{isUserProfile && (
 						<FriendRequest
+							id={id}
 							auth={auth}
 							authHeader={authHeader}
 							setFriendsUpdate={setFriendsUpdate}
@@ -82,6 +84,7 @@ const Profile = ({ auth, authHeader }) => {
 						authHeader={authHeader}
 						isUserProfile={isUserProfile}
 						friendsUpdate={friendsUpdate}
+						setFriendsUpdate={setFriendsUpdate}
 					/>
 				</>
 			)}
