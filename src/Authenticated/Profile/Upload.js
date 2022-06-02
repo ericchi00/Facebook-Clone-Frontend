@@ -17,7 +17,7 @@ const bucket = new AWS.S3({
 	region: process.env.REACT_APP_REGION,
 });
 
-const Upload = ({ buttonName, setEditPicture, label, setProfileChange }) => {
+const Upload = ({ setEditPicture, setProfileChange }) => {
 	const [file, setFile] = useState();
 	const [disabled, setDisabled] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -99,7 +99,7 @@ const Upload = ({ buttonName, setEditPicture, label, setProfileChange }) => {
 	return (
 		<Form className="w-75">
 			<Form.Group className="mb-3" controlId="uploadProfilePicture">
-				<Form.Label className="text-light">{label}</Form.Label>
+				<Form.Label className="text-light">Profile Picture</Form.Label>
 				<input
 					className="form-control"
 					name="picture"
