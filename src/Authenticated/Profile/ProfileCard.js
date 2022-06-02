@@ -10,7 +10,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ProfileForm from './ProfileForm';
 import ConfirmDelete from './ConfirmDelete';
-import Upload from '../Upload';
+import Upload from './Upload';
 
 const ProfileCard = ({
 	auth,
@@ -117,7 +117,6 @@ const ProfileCard = ({
 				)}
 				{editPicture && (
 					<Upload
-						label="Profile Picture"
 						setProfileChange={setProfileChange}
 						setEditPicture={setEditPicture}
 					/>
