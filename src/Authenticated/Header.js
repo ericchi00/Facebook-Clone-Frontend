@@ -46,10 +46,9 @@ const Header = ({ auth, authHeader }) => {
 							<small>See your profile</small>
 						</div>
 					</NavDropdown.Item>
-					<NavDropdown.Item as={Link} to={`/profile/${id}`}>
-						Friends
+					<NavDropdown.Item as={Link} to={'/profile'}>
+						People
 					</NavDropdown.Item>
-					<NavDropdown.Item>Messages</NavDropdown.Item>
 					<NavDropdown.Item
 						className="w-auto"
 						onClick={() => {
