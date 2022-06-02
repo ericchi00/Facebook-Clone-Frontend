@@ -3,8 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import PostForm from '../PostForm';
-import FriendRequest from './FriendRequest';
-import FriendsList from './FriendsList';
 import ProfileCard from './ProfileCard';
 
 const Profile = ({ auth, authHeader }) => {
@@ -13,7 +11,6 @@ const Profile = ({ auth, authHeader }) => {
 	const [loading, setLoading] = useState(true);
 	const [isUserProfile, setIsUserProfile] = useState(false);
 	const [profileChange, setProfileChange] = useState(false);
-	const [friendsUpdate, setFriendsUpdate] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -68,23 +65,7 @@ const Profile = ({ auth, authHeader }) => {
 						authHeader={authHeader}
 						isUserProfile={isUserProfile}
 						info={info}
-						id={id}
 						setProfileChange={setProfileChange}
-					/>
-					{isUserProfile && (
-						<FriendRequest
-							id={id}
-							auth={auth}
-							authHeader={authHeader}
-							setFriendsUpdate={setFriendsUpdate}
-						/>
-					)}
-					<FriendsList
-						id={id}
-						authHeader={authHeader}
-						isUserProfile={isUserProfile}
-						friendsUpdate={friendsUpdate}
-						setFriendsUpdate={setFriendsUpdate}
 					/>
 				</>
 			)}
