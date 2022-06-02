@@ -11,6 +11,7 @@ const UserInfo = ({ auth }) => {
 	const id = auth().id;
 	const signOut = useSignOut();
 	const fullName = auth().firstName + ' ' + auth().lastName;
+
 	return (
 		<Container
 			fluid="sm mt-4"
@@ -24,6 +25,15 @@ const UserInfo = ({ auth }) => {
 				className="w-100 rounded"
 				style={{ background: '#323232' }}
 			>
+				<Button
+					as={Link}
+					to={'/'}
+					className={className}
+					variant="outline-dark"
+					style={{ border: 'none', height: '56px' }}
+				>
+					Home
+				</Button>
 				<Button
 					className={className}
 					variant="outline-dark"
@@ -41,13 +51,13 @@ const UserInfo = ({ auth }) => {
 					{' ' + fullName}
 				</Button>
 				<Button
+					as={Link}
+					to={'/people'}
 					className={className}
 					variant="outline-dark"
-					as={Link}
-					to={`/profile/${id}`}
 					style={{ border: 'none', height: '56px' }}
 				>
-					Account
+					People
 				</Button>
 				<Button
 					onClick={() => signOut()}
