@@ -88,7 +88,6 @@ const Login = () => {
 						<Button variant="primary" type="submit">
 							Login
 						</Button>
-						<div className="border-top mt-3 border"></div>
 						<Button
 							variant="success"
 							className="mt-3"
@@ -96,7 +95,6 @@ const Login = () => {
 						>
 							Create new account
 						</Button>
-						<div className="border-top mt-3 border"></div>
 						<Button className="mt-3" variant="warning" type="button">
 							Test drive an existing account!
 						</Button>
