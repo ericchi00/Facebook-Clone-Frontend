@@ -9,6 +9,7 @@ import {
 import Header from '../Authenticated/Header';
 import Home from '../Authenticated/Home';
 import Profile from '../Authenticated/Profile/Profile';
+import People from '../Authenticated/People';
 import Footer from '../components/Footer';
 import ErrorPage from '../components/ErrorPage';
 
@@ -31,6 +32,14 @@ const RoutesComponent = () => {
 						element={
 							<RequireAuth loginPath="/">
 								<Profile auth={auth} authHeader={authHeader} />
+							</RequireAuth>
+						}
+					/>
+					<Route
+						path="/people"
+						element={
+							<RequireAuth loginPath="/">
+								<People auth={auth} authHeader={authHeader} />
 							</RequireAuth>
 						}
 					/>
