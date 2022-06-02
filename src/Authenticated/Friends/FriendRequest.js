@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Accept } from '../../assets/accept.svg';
 import { ReactComponent as Decline } from '../../assets/decline.svg';
 
-const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
+const FriendRequest = ({ auth, authHeader, setRerender }) => {
 	const [friendRequestList, setFriendRequestList] = useState([]);
 	const [reload, setReload] = useState(null);
 
@@ -57,7 +57,7 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 	return (
 		<>
 			{friendRequestList.length > 0 && (
-				<div className="w-100 h-100 p-2" style={{ background: '#323232' }}>
+				<div className="p-2 mt-1" style={{ background: '#323232' }}>
 					<h5 className="text-center text-light">Friend Requests</h5>
 					<div
 						className="d-flex flex-wrap justify-content-around"
