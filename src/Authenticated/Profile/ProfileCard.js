@@ -16,20 +16,25 @@ const ProfileCard = ({
 	isUserProfile,
 	info,
 	setProfileChange,
-	id,
 }) => {
+	const { id } = useParams();
 	const [editProfile, setEditProfile] = useState(false);
 	const [editPicture, setEditPicture] = useState(false);
-	const [isFriend, setIsFriend] = useState(null);
-	const [friendRequest, setFriendRequest] = useState(null);
+	const [isFriend, setIsFriend] = useState(false);
+	const [pendingRequest, setPendingRequest] = useState(false);
+	const [acceptButton, setAcceptButton] = useState(false);
 
 	useEffect(() => {
 		if (!isUserProfile) {
-			if (info.friendRequest.includes(auth().id)) {
-				setFriendRequest(true);
-			}
 			if (info.friends.includes(auth().id)) {
 				setIsFriend(true);
+			}
+			if (info.friendRequest.includes(auth().id)) {
+				setPendingRequest(true);
+			}
+			if (info.sentFriendRequest.includes(auth().id)) {
+				setPendingRequest(true);
+				setAcceptButton(true);
 			}
 		}
 	}, [id, isUserProfile]);
@@ -44,11 +49,11 @@ const ProfileCard = ({
 			body: JSON.stringify({ user: auth().id, friend: id }),
 		});
 		if (putFriend.status === 200) {
-			setFriendRequest(true);
+			setPendingRequest(true);
 		}
 	};
 
-	const deleteFriendRequest = async () => {
+	const cancelFriendRequest = async () => {
 		const deleteFriend = await fetch('/api/friends/request', {
 			method: 'DELETE',
 			headers: {
@@ -57,9 +62,23 @@ const ProfileCard = ({
 			},
 			body: JSON.stringify({ user: auth().id, friend: id }),
 		});
-
 		if (deleteFriend.status === 200) {
-			setFriendRequest(false);
+			setPendingRequest(false);
+		}
+	};
+
+	const acceptFriendRequest = async () => {
+		const putFriend = await fetch(`/api/friends/request/${auth().id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ user: auth().id, friend: id }),
+		});
+		if (putFriend.status === 200) {
+			setPendingRequest(false);
+			setIsFriend(true);
 		}
 	};
 
@@ -141,17 +160,29 @@ const ProfileCard = ({
 								<RemoveFriend /> Remove Friend
 							</Button>
 						)}
-						{!isUserProfile && friendRequest && (
-							<Button
-								variant="danger"
-								onClick={() => deleteFriendRequest()}
-								className="d-flex align-items-center"
-								style={{ gap: '.3rem' }}
-							>
-								<RemoveFriend /> Remove Friend Request
-							</Button>
-						)}
-						{!isUserProfile && !friendRequest && !isFriend && (
+						<div className="d-flex" style={{ gap: '.5rem' }}>
+							{!isUserProfile && pendingRequest && acceptButton && (
+								<Button
+									variant="primary"
+									onClick={() => acceptFriendRequest()}
+									className="d-flex align-items-center"
+									style={{ gap: '.3rem' }}
+								>
+									<RemoveFriend /> Accept Friend Request
+								</Button>
+							)}
+							{!isUserProfile && pendingRequest && (
+								<Button
+									variant="danger"
+									onClick={() => cancelFriendRequest()}
+									className="d-flex align-items-center"
+									style={{ gap: '.3rem' }}
+								>
+									<RemoveFriend /> Cancel Friend Request
+								</Button>
+							)}
+						</div>
+						{!isUserProfile && !pendingRequest && !isFriend && (
 							<Button
 								variant="primary"
 								onClick={() => sendFriendRequest()}
