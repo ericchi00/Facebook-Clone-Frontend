@@ -121,7 +121,7 @@ const ProfileForm = ({ setProfileChange, setEditProfile }) => {
 						Save Changes
 					</Button>
 					<Button
-						variant="danger"
+						variant="secondary"
 						type="button"
 						onClick={() => setEditProfile(false)}
 					>
