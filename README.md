@@ -8,12 +8,10 @@ https://www.theodinproject.com/lessons/nodejs-blog-api
 
 ## Technologies
 
-HTML, React-Bootstrap, React, Formik (form valiidation), Yup (schema validation), React Auth Kit(Auth Management Library), Date-FNS (time formatting), S3 (storing images)
+HTML, React-Bootstrap, React, Formik (form valiidation), Yup (schema validation), React Auth Kit (Auth Management Library), Date-FNS (time formatting), S3 (storing images)
 
 ## Features
 
 ## Icons
 
 Icons are from [Bootstrap Icons](https://icons.getbootstrap.com/)
-
-They are free and open source. Thanks Bootstrap!
