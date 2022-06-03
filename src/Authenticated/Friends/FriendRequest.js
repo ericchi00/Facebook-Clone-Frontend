@@ -76,7 +76,7 @@ const FriendRequest = ({ auth, authHeader, setRerender }) => {
 											variant="dark"
 											as={Link}
 											to={`/profile/${request._id}`}
-											className="d-flex p-2 text-light"
+											className="d-flex p-1 text-light align-items-center"
 											style={{
 												background: '#404040',
 												gap: '.5rem',
@@ -86,9 +86,9 @@ const FriendRequest = ({ auth, authHeader, setRerender }) => {
 											<img
 												src={request.picture}
 												alt={request.firstName + ' profile picture'}
-												width={24}
-												height={24}
-												className="rounded-circle pe-auto"
+												width={32}
+												height={32}
+												className="rounded-circle"
 											/>
 											{request.firstName + ' ' + request.lastName}
 										</Button>
