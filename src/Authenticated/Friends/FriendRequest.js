@@ -11,6 +11,7 @@ const FriendRequest = ({ auth, authHeader, setRerender }) => {
 	useEffect(() => {
 		setReload(false);
 		getFriendRequest();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [reload]);
 
 	const getFriendRequest = async () => {

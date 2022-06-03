@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
-import PostForm from '../PostForm';
+import PostForm from '../Post/PostForm';
 import ProfileCard from './ProfileCard';
 
 const Profile = ({ auth, authHeader }) => {
@@ -22,6 +22,7 @@ const Profile = ({ auth, authHeader }) => {
 			setIsUserProfile(false);
 		}
 		getInfo();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id, profileChange]);
 
 	const getInfo = async () => {

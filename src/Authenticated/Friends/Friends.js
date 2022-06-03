@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import FriendRequest from './FriendRequest';
 import FriendsList from './FriendsList';

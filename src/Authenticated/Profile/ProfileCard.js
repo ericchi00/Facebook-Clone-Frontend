@@ -41,6 +41,7 @@ const ProfileCard = ({
 				setAcceptButton(true);
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id, isUserProfile]);
 
 	const sendFriendRequest = async () => {
@@ -115,12 +116,7 @@ const ProfileCard = ({
 						setEditProfile={setEditProfile}
 					/>
 				)}
-				{editPicture && (
-					<Upload
-						setProfileChange={setProfileChange}
-						setEditPicture={setEditPicture}
-					/>
-				)}
+				{editPicture && <Upload setEditPicture={setEditPicture} />}
 				{!editPicture && !editProfile && (
 					<>
 						<img

@@ -14,6 +14,7 @@ const People = ({ auth, authHeader }) => {
 
 	useEffect(() => {
 		getUsers();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const getUsers = async () => {
