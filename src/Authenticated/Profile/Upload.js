@@ -17,7 +17,7 @@ const bucket = new AWS.S3({
 	region: process.env.REACT_APP_REGION,
 });
 
-const Upload = ({ setEditPicture, setProfileChange }) => {
+const Upload = ({ setEditPicture }) => {
 	const [file, setFile] = useState();
 	const [disabled, setDisabled] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -104,7 +104,7 @@ const Upload = ({ setEditPicture, setProfileChange }) => {
 					className="form-control"
 					name="picture"
 					type="file"
-					accpet="image/png, image/jpeg, image/jpg"
+					accept="image/png, image/jpeg, image/jpg"
 					onChange={(e) => {
 						setFile(e.target.files[0]);
 						setDisabled(false);
@@ -135,7 +135,7 @@ const Upload = ({ setEditPicture, setProfileChange }) => {
 						'Save'
 					)}
 				</Button>
-				<Button variant="danger" onClick={() => setEditPicture(false)}>
+				<Button variant="secondary" onClick={() => setEditPicture(false)}>
 					Cancel
 				</Button>
 			</div>
