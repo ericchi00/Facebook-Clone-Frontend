@@ -41,11 +41,10 @@ const FriendsList = ({ auth, authHeader, rerender }) => {
 								as={Link}
 								to={`/profile/${friend._id}`}
 								key={i}
-								className="d-flex p-3 text-light justify-content-center
-										align-items-center"
+								className="d-flex p-2 text-light justify-content-center
+										align-items-center w-100"
 								style={{
 									background: '#404040',
-									width: '250px',
 									gap: '.5rem',
 									border: 'none',
 								}}
@@ -53,9 +52,9 @@ const FriendsList = ({ auth, authHeader, rerender }) => {
 								<img
 									src={friend.picture}
 									alt={'profile of ' + friend.firstName}
-									height={24}
-									width={24}
-									className="rounded-circle pe-auto"
+									height={32}
+									width={32}
+									className="rounded-circle"
 								/>
 								{friend.firstName + ' ' + friend.lastName}
 							</Button>
