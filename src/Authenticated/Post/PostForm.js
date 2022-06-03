@@ -31,7 +31,6 @@ const PostForm = ({ auth, authHeader, setNewPost }) => {
 	const [picture, setPicture] = useState();
 	const [errorMessage, setErrorMessage] = useState('');
 	const [error, setError] = useState(false);
-
 	const [show, setShow] = useState(false);
 
 	const handleSubmit = async () => {
@@ -106,7 +105,7 @@ const PostForm = ({ auth, authHeader, setNewPost }) => {
 					/>
 				</Form.Group>
 				<div className="d-flex justify-content-center" style={{ gap: '.5rem' }}>
-					<Button variant="light" onClick={() => setShow(true)}>
+					<Button variant="light" onClick={() => setShow(!show)}>
 						Add Image
 					</Button>
 					<Button
