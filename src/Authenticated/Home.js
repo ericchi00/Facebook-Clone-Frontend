@@ -9,13 +9,30 @@ import Container from 'react-bootstrap/Container';
 import useCheckMobileScreen from '../hooks/useCheckMobileScreen';
 
 const Home = ({ auth, authHeader }) => {
-	const [posts, setPosts] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+	const [posts, setPosts] = useState([]);
 	const checkMobile = useCheckMobileScreen();
 	const isAuthenticated = useIsAuthenticated();
+	const [newPost, setNewPost] = useState(false);
 
 	useEffect(() => {
 		document.title = 'Facebook Clone';
-	});
+		if (isAuthenticated()) {
+			getAllPosts();
+		}
+	}, [newPost, isAuthenticated()]);
+
+	const getAllPosts = async () => {
+		const getPosts = await fetch(`/api/posts`, {
+			method: 'GET',
+			headers: {
+				Authorization: authHeader(),
+			},
+		});
+		if (getPosts.status === 200) {
+			const response = await getPosts.json();
+			setPosts(response);
+		}
+	};
 
 	return (
 		<>
@@ -29,12 +46,22 @@ const Home = ({ auth, authHeader }) => {
 				>
 					{!checkMobile && <UserInfo auth={auth} />}
 					<div className="w-100">
-						<PostForm auth={auth} authHeader={authHeader} />
-						{posts.map((userInfo, i) => {
-							return <Post key={i} />;
+						<PostForm
+							auth={auth}
+							authHeader={authHeader}
+							setNewPost={setNewPost}
+						/>
+						{posts.map((postInfo) => {
+							return (
+								<Post
+									auth={auth}
+									authHeader={authHeader}
+									postInfo={postInfo}
+									key={postInfo._id}
+								/>
+							);
 						})}
 					</div>
-
 					{!checkMobile && <Friends auth={auth} authHeader={authHeader} />}
 				</Container>
 			)}
