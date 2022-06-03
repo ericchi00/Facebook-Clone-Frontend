@@ -22,6 +22,11 @@ const Post = ({ auth, authHeader, postInfo }) => {
 		getComments();
 	}, [newComment]);
 
+	const [likes, setLikes] = useState(postInfo.likes.length);
+	const [userLiked, setUserLiked] = useState(
+		postInfo.likes.includes(auth().id) || false
+	);
+
 	const getComments = async () => {
 		const postComment = await fetch(`/api/posts/${postInfo._id}/comments`, {
 			method: 'GET',
@@ -51,6 +56,20 @@ const Post = ({ auth, authHeader, postInfo }) => {
 		}
 		if (postComment.status === 200) {
 			setNewComment(true);
+		}
+	};
+
+	const handleLikes = async () => {
+		const putPostLike = await fetch(`/api/posts/${postInfo._id}/`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ name: auth().id }),
+		});
+		if (putPostLike.status === 200) {
+			setUserLiked(!userLiked);
 		}
 	};
 
@@ -100,7 +119,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 					)}
 					<Card.Text className="mt-1">
 						<small style={{ fontSize: '.8rem' }}>
-							{postInfo.likes.length} Likes
+							{!userLiked ? likes : likes + 1} Likes
 						</small>
 					</Card.Text>
 				</Card.Body>
@@ -108,19 +127,33 @@ const Post = ({ auth, authHeader, postInfo }) => {
 					className="d-flex justify-content-center"
 					style={{ gap: '1rem' }}
 				>
+					{userLiked ? (
+						<Button
+							variant="outline-dark text-light"
+							className="d-flex align-items-center"
+							style={{ gap: '.3rem', border: 'none' }}
+							onClick={() => handleLikes()}
+						>
+							<Like />
+							Unlike
+						</Button>
+					) : (
+						<Button
+							variant="outline-dark text-light"
+							className="d-flex align-items-center"
+							style={{ gap: '.3rem', border: 'none' }}
+							onClick={() => handleLikes()}
+						>
+							<Like />
+							Like
+						</Button>
+					)}
+
 					<Button
 						variant="outline-dark text-light"
 						className="d-flex align-items-center"
 						style={{ gap: '.3rem', border: 'none' }}
-					>
-						<Like />
-						Like
-					</Button>
-					<Button
-						variant="outline-dark text-light"
-						className="d-flex align-items-center"
-						style={{ gap: '.3rem', border: 'none' }}
-						onClick={() => setShowCommentBox(true)}
+						onClick={() => setShowCommentBox(!showCommentBox)}
 					>
 						<CommentIcon />
 						Comment
