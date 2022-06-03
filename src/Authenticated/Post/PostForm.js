@@ -25,7 +25,7 @@ const formStyle = {
 	color: '#fff',
 };
 
-const PostForm = ({ auth, authHeader }) => {
+const PostForm = ({ auth, authHeader, setNewPost }) => {
 	const [disabled, setDisabled] = useState(false);
 	const [post, setPost] = useState('');
 	const [picture, setPicture] = useState();
@@ -68,7 +68,7 @@ const PostForm = ({ auth, authHeader }) => {
 			setErrorMessage(error);
 		}
 		if (postPost.status === 200) {
-			console.log('success');
+			setNewPost(true);
 		}
 		document.getElementById('post-submission').reset();
 	};
@@ -91,7 +91,7 @@ const PostForm = ({ auth, authHeader }) => {
 						alt="your profile"
 						width={50}
 						height={50}
-						className="rounded-circle pe-auto"
+						className="rounded-circle"
 					/>
 					<Form.Control
 						className="rounded"
