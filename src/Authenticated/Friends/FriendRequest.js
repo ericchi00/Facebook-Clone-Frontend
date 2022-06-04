@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { ReactComponent as Accept } from '../../assets/accept.svg';
 import { ReactComponent as Decline } from '../../assets/decline.svg';
 
@@ -92,14 +94,24 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 											{request.firstName + ' ' + request.lastName}
 										</Button>
 										<div className="d-flex" style={{ gap: '.5rem' }}>
-											<Accept
-												onClick={() => acceptFriendRequest(request._id)}
-												style={{ cursor: 'pointer' }}
-											/>
-											<Decline
-												onClick={() => declineFriendRequest(request._id)}
-												style={{ cursor: 'pointer' }}
-											/>
+											<OverlayTrigger
+												placement="bottom"
+												overlay={<Tooltip>Accept friend request</Tooltip>}
+											>
+												<Accept
+													onClick={() => acceptFriendRequest(request._id)}
+													style={{ cursor: 'pointer' }}
+												/>
+											</OverlayTrigger>
+											<OverlayTrigger
+												placement="bottom"
+												overlay={<Tooltip>Decline friend request</Tooltip>}
+											>
+												<Decline
+													onClick={() => declineFriendRequest(request._id)}
+													style={{ cursor: 'pointer' }}
+												/>
+											</OverlayTrigger>
 										</div>
 									</div>
 								);
