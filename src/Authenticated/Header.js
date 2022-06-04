@@ -46,7 +46,7 @@ const Header = ({ auth, authHeader }) => {
 							<small>See your profile</small>
 						</div>
 					</NavDropdown.Item>
-					<NavDropdown.Item as={Link} to={'/profile'}>
+					<NavDropdown.Item as={Link} to={'/people'}>
 						People
 					</NavDropdown.Item>
 					<NavDropdown.Item
