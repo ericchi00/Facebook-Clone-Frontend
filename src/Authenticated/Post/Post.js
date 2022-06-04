@@ -6,21 +6,16 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Like } from '../../assets/like.svg';
+import LikeSvg from '../../assets/LikeSvg';
 import { ReactComponent as CommentIcon } from '../../assets/comment.svg';
 import { formatDistanceToNow } from 'date-fns';
 
 const Post = ({ auth, authHeader, postInfo }) => {
 	const [comment, setComment] = useState();
 	const [newComment, setNewComment] = useState(false);
-	const [commentList, setCommentList] = useState([]);
+	const [commentList, setCommentList] = useState(postInfo.comments);
 	const [showCommentBox, setShowCommentBox] = useState(false);
 	const [error, setError] = useState(false);
-
-	useEffect(() => {
-		setNewComment(false);
-		getComments();
-	}, [newComment]);
 
 	const [likes, setLikes] = useState(postInfo.likes.length);
 	const [userLiked, setUserLiked] = useState(
@@ -36,7 +31,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 		});
 		if (postComment.status === 200) {
 			const response = await postComment.json();
-			setCommentList(response);
+			setCommentList(response.comments);
 		}
 	};
 
@@ -55,11 +50,16 @@ const Post = ({ auth, authHeader, postInfo }) => {
 			setError(true);
 		}
 		if (postComment.status === 200) {
-			setNewComment(true);
+			setNewComment(!newComment);
 		}
+		document.getElementById('post-comment').value = '';
+		// grabs comments again after posting comment
+		getComments();
 	};
 
 	const handleLikes = async () => {
+		if (!userLiked) setLikes(likes + 1);
+		if (userLiked) setLikes(likes - 1);
 		const putPostLike = await fetch(`/api/posts/${postInfo._id}/`, {
 			method: 'PUT',
 			headers: {
@@ -110,7 +110,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 					</div>
 				</Card.Header>
 				<Card.Body>
-					<Card.Text style={{ fontSize: '.8rem' }}>{postInfo.text}</Card.Text>
+					<Card.Text>{postInfo.text}</Card.Text>
 					{postInfo.picture.length > 0 && (
 						<Card.Img
 							src={postInfo.picture}
@@ -118,36 +118,22 @@ const Post = ({ auth, authHeader, postInfo }) => {
 						/>
 					)}
 					<Card.Text className="mt-1">
-						<small style={{ fontSize: '.8rem' }}>
-							{!userLiked ? likes : likes + 1} Likes
-						</small>
+						<small style={{ fontSize: '.8rem' }}>{likes} Likes</small>
 					</Card.Text>
 				</Card.Body>
 				<Card.Footer
 					className="d-flex justify-content-center"
 					style={{ gap: '1rem' }}
 				>
-					{userLiked ? (
-						<Button
-							variant="outline-dark text-light"
-							className="d-flex align-items-center"
-							style={{ gap: '.3rem', border: 'none' }}
-							onClick={() => handleLikes()}
-						>
-							<Like />
-							Unlike
-						</Button>
-					) : (
-						<Button
-							variant="outline-dark text-light"
-							className="d-flex align-items-center"
-							style={{ gap: '.3rem', border: 'none' }}
-							onClick={() => handleLikes()}
-						>
-							<Like />
-							Like
-						</Button>
-					)}
+					<Button
+						variant="outline-dark text-light"
+						className="d-flex align-items-center"
+						style={{ gap: '.3rem', border: 'none' }}
+						onClick={() => handleLikes()}
+					>
+						<LikeSvg color="white" />
+						{userLiked ? 'Unlike' : 'Like'}
+					</Button>
 
 					<Button
 						variant="outline-dark text-light"
@@ -170,7 +156,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 								}}
 								type="text"
 								placeholder="Write a comment..."
-								className=""
+								id="post-comment"
 								style={{
 									background: '#404040',
 									color: '#fff',
@@ -188,10 +174,17 @@ const Post = ({ auth, authHeader, postInfo }) => {
 						)}
 					</>
 				)}
-				{commentList.comments && commentList.comments.length > 0 && (
+				{commentList.length > 0 && (
 					<Card.Footer className="p-0">
-						{commentList.comments.map((comment) => {
-							return <Comment key={comment._id} comment={comment} />;
+						{commentList.map((comment) => {
+							return (
+								<Comment
+									key={comment._id}
+									comment={comment}
+									auth={auth}
+									authHeader={authHeader}
+								/>
+							);
 						})}
 					</Card.Footer>
 				)}
