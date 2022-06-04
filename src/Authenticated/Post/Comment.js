@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNowStrict } from 'date-fns';
-import { ReactComponent as Like } from '../../assets/like.svg';
+import LikeSvg from '../../assets/LikeSvg';
 
-const Comment = ({ comment }) => {
+const Comment = ({ auth, authHeader, comment }) => {
+	const [likes, setLikes] = useState(comment.likes.length);
+	const [userLiked, setUserLiked] = useState(
+		comment.likes.includes(auth().id || false)
+	);
+	const [color, setColor] = useState();
+
+	const handleLikes = async () => {
+		if (userLiked) setLikes(likes - 1);
+		if (!userLiked) setLikes(likes + 1);
+		const putCommentLike = await fetch(`/api/posts/comments/${comment._id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ name: auth().id }),
+		});
+		if (putCommentLike.status === 200) {
+			setUserLiked(!userLiked);
+		}
+	};
+
 	return (
 		<Card
 			style={{
@@ -44,8 +66,12 @@ const Comment = ({ comment }) => {
 							variant="outline-dark text-light"
 							className="d-flex align-items-center float-end"
 							style={{ border: 'none', gap: '.3rem' }}
+							onClick={() => handleLikes()}
 						>
-							<Like /> 0
+							<LikeSvg
+								{...(userLiked ? { color: 'green' } : { color: 'white' })}
+							/>
+							{likes}
 						</Button>
 					</div>
 				</div>
