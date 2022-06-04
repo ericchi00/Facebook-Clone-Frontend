@@ -103,7 +103,7 @@ const ProfileCard = ({
 
 	return (
 		<Container
-			fluid="sm d-flex flex-column align-items-center mt-3"
+			fluid="sm d-flex flex-column align-items-center mt-4 p-0"
 			style={{ maxWidth: '600px' }}
 		>
 			<Card
