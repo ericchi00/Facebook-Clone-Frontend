@@ -49,6 +49,7 @@ const Home = ({ auth, authHeader }) => {
 						<PostForm
 							auth={auth}
 							authHeader={authHeader}
+							newPost={newPost}
 							setNewPost={setNewPost}
 						/>
 						{posts.map((postInfo) => {
