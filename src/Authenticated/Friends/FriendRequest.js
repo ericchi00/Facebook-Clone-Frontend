@@ -60,62 +60,61 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 		<>
 			{friendRequestList.length > 0 && (
 				<div className="p-2 mt-1" style={{ background: '#323232' }}>
-					<h5 className="text-center text-light">Friend Requests</h5>
+					<h5 className="text-center text-light mt-3">Friend Requests</h5>
 					<div
 						className="d-flex flex-wrap justify-content-around"
 						style={{ gap: '.8rem' }}
 					>
-						{friendRequestList.length > 0 &&
-							friendRequestList.map((request, i) => {
-								return (
-									<div
-										key={i}
-										className="d-flex p-2 text-light justify-content-between align-items-center rounded"
-										style={{ background: '#404040', width: '280px' }}
+						{friendRequestList.map((request, i) => {
+							return (
+								<div
+									key={i}
+									className="d-flex p-2 text-light justify-content-between align-items-center rounded w-100"
+									style={{ background: '#404040' }}
+								>
+									<Button
+										variant="dark"
+										as={Link}
+										to={`/profile/${request._id}`}
+										className="d-flex p-1 text-light align-items-center"
+										style={{
+											background: '#404040',
+											gap: '.5rem',
+											border: 'none',
+										}}
 									>
-										<Button
-											variant="dark"
-											as={Link}
-											to={`/profile/${request._id}`}
-											className="d-flex p-1 text-light align-items-center"
-											style={{
-												background: '#404040',
-												gap: '.5rem',
-												border: 'none',
-											}}
+										<img
+											src={request.picture}
+											alt={request.firstName + ' profile picture'}
+											width={32}
+											height={32}
+											className="rounded-circle"
+										/>
+										{request.firstName + ' ' + request.lastName}
+									</Button>
+									<div className="d-flex" style={{ gap: '.5rem' }}>
+										<OverlayTrigger
+											placement="bottom"
+											overlay={<Tooltip>Accept friend request</Tooltip>}
 										>
-											<img
-												src={request.picture}
-												alt={request.firstName + ' profile picture'}
-												width={32}
-												height={32}
-												className="rounded-circle"
+											<Accept
+												onClick={() => acceptFriendRequest(request._id)}
+												style={{ cursor: 'pointer' }}
 											/>
-											{request.firstName + ' ' + request.lastName}
-										</Button>
-										<div className="d-flex" style={{ gap: '.5rem' }}>
-											<OverlayTrigger
-												placement="bottom"
-												overlay={<Tooltip>Accept friend request</Tooltip>}
-											>
-												<Accept
-													onClick={() => acceptFriendRequest(request._id)}
-													style={{ cursor: 'pointer' }}
-												/>
-											</OverlayTrigger>
-											<OverlayTrigger
-												placement="bottom"
-												overlay={<Tooltip>Decline friend request</Tooltip>}
-											>
-												<Decline
-													onClick={() => declineFriendRequest(request._id)}
-													style={{ cursor: 'pointer' }}
-												/>
-											</OverlayTrigger>
-										</div>
+										</OverlayTrigger>
+										<OverlayTrigger
+											placement="bottom"
+											overlay={<Tooltip>Decline friend request</Tooltip>}
+										>
+											<Decline
+												onClick={() => declineFriendRequest(request._id)}
+												style={{ cursor: 'pointer' }}
+											/>
+										</OverlayTrigger>
 									</div>
-								);
-							})}
+								</div>
+							);
+						})}
 					</div>
 				</div>
 			)}
