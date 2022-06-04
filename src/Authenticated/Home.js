@@ -56,9 +56,13 @@ const Home = ({ auth, authHeader }) => {
 							</Spinner>
 						</Container>
 					) : (
-						<Container fluid="lg" className="d-flex justify-content-between">
+						<Container
+							fluid="lg"
+							className="d-flex justify-content-between"
+							style={{ gap: '1rem' }}
+						>
 							{!checkMobile && <UserInfo auth={auth} />}
-							<div className="w-100">
+							<div className="w-100 d-flex flex-column align-items-center">
 								<PostForm
 									auth={auth}
 									authHeader={authHeader}

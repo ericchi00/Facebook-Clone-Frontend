@@ -73,7 +73,7 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 	};
 
 	return (
-		<Container fluid="sm mt-4" style={{ maxWidth: '600px' }}>
+		<Container fluid="sm mt-4" style={{ maxWidth: '600px', padding: '0' }}>
 			<Form
 				id="post-submission"
 				className="rounded d-flex flex-column p-3"

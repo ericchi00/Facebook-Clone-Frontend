@@ -10,7 +10,7 @@ const Friends = ({ auth, authHeader, width }) => {
 	const [rerender, setRerender] = useState(false);
 	return (
 		<Container
-			fluid="sm mt-4 d-flex flex-column rounded"
+			fluid="sm mt-4 mb-4 d-flex flex-column rounded"
 			style={{
 				maxWidth: width,
 				background: '#323232',

@@ -58,7 +58,11 @@ const People = ({ auth, authHeader }) => {
 						</Spinner>
 					</Container>
 				) : (
-					<ListGroup className="w-100 mt-4 rounded" variant="flush">
+					<ListGroup
+						className="w-100 mt-4 mb-4 rounded"
+						variant="flush"
+						style={{ maxWidth: '600px' }}
+					>
 						{users.map((user) => {
 							return (
 								<PeopleItem
@@ -72,7 +76,9 @@ const People = ({ auth, authHeader }) => {
 					</ListGroup>
 				)}
 
-				{!checkMobile && <Friends auth={auth} authHeader={authHeader} />}
+				{!checkMobile && (
+					<Friends auth={auth} authHeader={authHeader} width={'300px'} />
+				)}
 			</Container>
 		</>
 	);

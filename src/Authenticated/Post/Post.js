@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Comment from './Comment';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
@@ -74,122 +73,123 @@ const Post = ({ auth, authHeader, postInfo }) => {
 	};
 
 	return (
-		<Container fluid="sm mt-4" style={{ maxWidth: '600px', padding: '0' }}>
-			<Card className="text-light m-3" style={{ background: '#323232' }}>
-				<Card.Header
-					className="d-flex align-items-center"
-					style={{ gap: '.5rem' }}
-				>
-					<Link to={`/profile/${postInfo.name._id}`}>
-						<img
-							style={{ cursor: 'pointer' }}
-							src={postInfo.name.picture}
-							width={32}
-							height={32}
-							className="rounded-circle"
-							alt={`${postInfo.name.firstName} + profile pic`}
-						/>
+		<Card
+			className="text-light mt-4"
+			style={{ background: '#323232', maxWidth: '600px' }}
+		>
+			<Card.Header
+				className="d-flex align-items-center"
+				style={{ gap: '.5rem' }}
+			>
+				<Link to={`/profile/${postInfo.name._id}`}>
+					<img
+						style={{ cursor: 'pointer' }}
+						src={postInfo.name.picture}
+						width={32}
+						height={32}
+						className="rounded-circle"
+						alt={`${postInfo.name.firstName} + profile pic`}
+					/>
+				</Link>
+				<div>
+					<Link
+						className="text-light"
+						to={`/profile/${postInfo.name._id}`}
+						style={{ textDecoration: 'none' }}
+					>
+						{postInfo.name.firstName + ' ' + postInfo.name.lastName}
 					</Link>
-					<div>
-						<Link
-							className="text-light"
-							to={`/profile/${postInfo.name._id}`}
-							style={{ textDecoration: 'none' }}
-						>
-							{postInfo.name.firstName + ' ' + postInfo.name.lastName}
-						</Link>
 
-						<p>
-							<small>
-								{formatDistanceToNow(new Date(postInfo.createdAt), {
-									includeSeconds: true,
-									addSuffix: true,
-								})}
-							</small>
-						</p>
-					</div>
-				</Card.Header>
-				<Card.Body>
-					<Card.Text>{postInfo.text}</Card.Text>
-					{postInfo.picture.length > 0 && (
-						<Card.Img
-							src={postInfo.picture}
-							alt={`${postInfo.name.firstName} + 'post pic'`}
-						/>
-					)}
-					<Card.Text className="mt-1">
-						<small style={{ fontSize: '.8rem' }}>{likes} Likes</small>
-					</Card.Text>
-				</Card.Body>
-				<Card.Footer
-					className="d-flex justify-content-center"
-					style={{ gap: '1rem' }}
+					<p>
+						<small>
+							{formatDistanceToNow(new Date(postInfo.createdAt), {
+								includeSeconds: true,
+								addSuffix: true,
+							})}
+						</small>
+					</p>
+				</div>
+			</Card.Header>
+			<Card.Body>
+				<Card.Text>{postInfo.text}</Card.Text>
+				{postInfo.picture.length > 0 && (
+					<Card.Img
+						src={postInfo.picture}
+						alt={`${postInfo.name.firstName} + 'post pic'`}
+					/>
+				)}
+				<Card.Text className="mt-1">
+					<small style={{ fontSize: '.8rem' }}>{likes} Likes</small>
+				</Card.Text>
+			</Card.Body>
+			<Card.Footer
+				className="d-flex justify-content-center"
+				style={{ gap: '1rem' }}
+			>
+				<Button
+					variant="outline-dark text-light"
+					className="d-flex align-items-center"
+					style={{ gap: '.3rem', border: 'none' }}
+					onClick={() => handleLikes()}
 				>
-					<Button
-						variant="outline-dark text-light"
-						className="d-flex align-items-center"
-						style={{ gap: '.3rem', border: 'none' }}
-						onClick={() => handleLikes()}
-					>
-						<LikeSvg color="white" />
-						{userLiked ? 'Unlike' : 'Like'}
-					</Button>
+					<LikeSvg color="white" />
+					{userLiked ? 'Unlike' : 'Like'}
+				</Button>
 
-					<Button
-						variant="outline-dark text-light"
-						className="d-flex align-items-center"
-						style={{ gap: '.3rem', border: 'none' }}
-						onClick={() => setShowCommentBox(!showCommentBox)}
-					>
-						<CommentIcon />
-						Comment
-					</Button>
-				</Card.Footer>
-				{showCommentBox && (
-					<>
-						<Card.Footer className="d-flex" style={{ gap: '.5rem' }}>
-							<Form.Label className="visually-hidden">Comment</Form.Label>
-							<Form.Control
-								onChange={(e) => {
-									setComment(e.target.value);
-									setError(false);
-								}}
-								type="text"
-								placeholder="Write a comment..."
-								id="post-comment"
-								style={{
-									background: '#404040',
-									color: '#fff',
-									border: 'none',
-								}}
-							/>
-							<Button variant="light" onClick={() => handleComment()}>
-								Post
-							</Button>
-						</Card.Footer>
-						{error && (
-							<Alert variant="danger">
-								Comment must be longer than one character.
-							</Alert>
-						)}
-					</>
-				)}
-				{commentList.length > 0 && (
-					<Card.Footer className="p-0">
-						{commentList.map((comment) => {
-							return (
-								<Comment
-									key={comment._id}
-									comment={comment}
-									auth={auth}
-									authHeader={authHeader}
-								/>
-							);
-						})}
+				<Button
+					variant="outline-dark text-light"
+					className="d-flex align-items-center"
+					style={{ gap: '.3rem', border: 'none' }}
+					onClick={() => setShowCommentBox(!showCommentBox)}
+				>
+					<CommentIcon />
+					Comment
+				</Button>
+			</Card.Footer>
+			{showCommentBox && (
+				<>
+					<Card.Footer className="d-flex" style={{ gap: '.5rem' }}>
+						<Form.Label className="visually-hidden">Comment</Form.Label>
+						<Form.Control
+							onChange={(e) => {
+								setComment(e.target.value);
+								setError(false);
+							}}
+							type="text"
+							placeholder="Write a comment..."
+							id="post-comment"
+							style={{
+								background: '#404040',
+								color: '#fff',
+								border: 'none',
+							}}
+						/>
+						<Button variant="light" onClick={() => handleComment()}>
+							Post
+						</Button>
 					</Card.Footer>
-				)}
-			</Card>
-		</Container>
+					{error && (
+						<Alert variant="danger">
+							Comment must be longer than one character.
+						</Alert>
+					)}
+				</>
+			)}
+			{commentList.length > 0 && (
+				<Card.Footer className="p-0">
+					{commentList.map((comment) => {
+						return (
+							<Comment
+								key={comment._id}
+								comment={comment}
+								auth={auth}
+								authHeader={authHeader}
+							/>
+						);
+					})}
+				</Card.Footer>
+			)}
+		</Card>
 	);
 };
 
