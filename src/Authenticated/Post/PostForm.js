@@ -25,7 +25,7 @@ const formStyle = {
 	color: '#fff',
 };
 
-const PostForm = ({ auth, authHeader, setNewPost }) => {
+const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 	const [disabled, setDisabled] = useState(false);
 	const [post, setPost] = useState('');
 	const [picture, setPicture] = useState();
@@ -67,7 +67,7 @@ const PostForm = ({ auth, authHeader, setNewPost }) => {
 			setErrorMessage(error);
 		}
 		if (postPost.status === 200) {
-			setNewPost(true);
+			setNewPost(!newPost);
 		}
 		document.getElementById('post-submission').reset();
 	};
