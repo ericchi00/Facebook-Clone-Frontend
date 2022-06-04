@@ -5,7 +5,6 @@ import FriendsList from './FriendsList';
 
 const Friends = ({ auth, authHeader }) => {
 	const [rerender, setRerender] = useState(false);
-
 	return (
 		<Container
 			fluid="sm mt-4 d-flex flex-column"
@@ -18,6 +17,7 @@ const Friends = ({ auth, authHeader }) => {
 			<FriendRequest
 				auth={auth}
 				authHeader={authHeader}
+				rerender={rerender}
 				setRerender={setRerender}
 			/>
 			<FriendsList auth={auth} authHeader={authHeader} rerender={rerender} />
