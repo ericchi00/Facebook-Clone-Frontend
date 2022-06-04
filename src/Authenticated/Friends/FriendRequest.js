@@ -4,12 +4,11 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as Accept } from '../../assets/accept.svg';
 import { ReactComponent as Decline } from '../../assets/decline.svg';
 
-const FriendRequest = ({ auth, authHeader, setRerender }) => {
+const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 	const [friendRequestList, setFriendRequestList] = useState([]);
-	const [reload, setReload] = useState(null);
+	const [reload, setReload] = useState(false);
 
 	useEffect(() => {
-		setReload(false);
 		getFriendRequest();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [reload]);
@@ -35,8 +34,8 @@ const FriendRequest = ({ auth, authHeader, setRerender }) => {
 			body: JSON.stringify({ user: auth().id, friend: friendID }),
 		});
 		if (putFriend.status === 200) {
-			setReload(true);
-			setRerender(true);
+			setReload(!reload);
+			setRerender(!rerender);
 		}
 	};
 
