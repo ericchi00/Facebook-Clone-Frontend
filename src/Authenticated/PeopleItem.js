@@ -25,42 +25,51 @@ const PeopleItem = ({ auth, user, authHeader }) => {
 	}, []);
 
 	const sendFriendRequest = async () => {
-		const putFriend = await fetch(`/api/friends/request`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: user._id }),
-		});
+		const putFriend = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/request`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: user._id }),
+			}
+		);
 		if (putFriend.status === 200) {
 			setFriendRequest(!friendRequest);
 		}
 	};
 
 	const removeFriend = async () => {
-		const deleteFriend = await fetch(`/api/friends/${auth().id}`, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: user._id }),
-		});
+		const deleteFriend = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/${auth().id}`,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: user._id }),
+			}
+		);
 		if (deleteFriend.status === 200) {
 			setIsFriend(!isFriend);
 		}
 	};
 
 	const cancelFriendRequest = async () => {
-		const deleteFriend = await fetch('/api/friends/request', {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: user._id }),
-		});
+		const deleteFriend = await fetch(
+			'https://backend-facebookclone.herokuapp.com/api/friends/request',
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: user._id }),
+			}
+		);
 		if (deleteFriend.status === 200) {
 			setFriendRequest(!friendRequest);
 		}

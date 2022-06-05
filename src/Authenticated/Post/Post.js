@@ -22,12 +22,15 @@ const Post = ({ auth, authHeader, postInfo }) => {
 	);
 
 	const getComments = async () => {
-		const postComment = await fetch(`/api/posts/${postInfo._id}/comments`, {
-			method: 'GET',
-			headers: {
-				Authorization: authHeader(),
-			},
-		});
+		const postComment = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/comments`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: authHeader(),
+				},
+			}
+		);
 		if (postComment.status === 200) {
 			const response = await postComment.json();
 			setCommentList(response.comments);
@@ -35,14 +38,17 @@ const Post = ({ auth, authHeader, postInfo }) => {
 	};
 
 	const handleComment = async () => {
-		const postComment = await fetch(`/api/posts/${postInfo._id}/comments`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ name: auth().id, text: comment }),
-		});
+		const postComment = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/comments`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ name: auth().id, text: comment }),
+			}
+		);
 		if (postComment.status === 400) {
 			setError(true);
 		}
@@ -57,14 +63,17 @@ const Post = ({ auth, authHeader, postInfo }) => {
 	const handleLikes = async () => {
 		if (!userLiked) setLikes(likes + 1);
 		if (userLiked) setLikes(likes - 1);
-		const putPostLike = await fetch(`/api/posts/${postInfo._id}/`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ name: auth().id }),
-		});
+		const putPostLike = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ name: auth().id }),
+			}
+		);
 		if (putPostLike.status === 200) {
 			setUserLiked(!userLiked);
 		}

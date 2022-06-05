@@ -8,12 +8,15 @@ const ConfirmDelete = ({ show, setShow, auth, authHeader }) => {
 	const signOut = useSignOut();
 	const navigate = useNavigate();
 	const deleteAccount = async () => {
-		const deleteFriend = await fetch(`/api/profile/${auth().id}`, {
-			method: 'DELETE',
-			headers: {
-				Authorization: authHeader(),
-			},
-		});
+		const deleteFriend = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/profile/${auth().id}`,
+			{
+				method: 'DELETE',
+				headers: {
+					Authorization: authHeader(),
+				},
+			}
+		);
 		if (deleteFriend.status !== 200) {
 			throw new Error('An error has occurred');
 		}

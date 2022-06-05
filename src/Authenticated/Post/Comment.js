@@ -14,14 +14,17 @@ const Comment = ({ auth, authHeader, comment }) => {
 	const handleLikes = async () => {
 		if (userLiked) setLikes(likes - 1);
 		if (!userLiked) setLikes(likes + 1);
-		const putCommentLike = await fetch(`/api/posts/comments/${comment._id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ name: auth().id }),
-		});
+		const putCommentLike = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/posts/comments/${comment._id}`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ name: auth().id }),
+			}
+		);
 		if (putCommentLike.status === 200) {
 			setUserLiked(!userLiked);
 		}

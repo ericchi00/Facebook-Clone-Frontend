@@ -19,12 +19,15 @@ const FriendsList = ({ auth, authHeader, rerender }) => {
 	}, [rerender, userID, id]);
 
 	const getFriends = async () => {
-		const getAllFriends = await fetch(`/api/friends/${userID}`, {
-			method: 'GET',
-			headers: {
-				Authorization: authHeader(),
-			},
-		});
+		const getAllFriends = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/${userID}`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: authHeader(),
+				},
+			}
+		);
 		if (getAllFriends.status === 200) {
 			const friends = await getAllFriends.json();
 			setFriends(friends.friends);

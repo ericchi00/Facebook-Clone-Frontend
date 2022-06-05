@@ -26,12 +26,15 @@ const Home = ({ auth, authHeader }) => {
 	}, [newPost, isAuthenticated()]);
 
 	const getAllPosts = async () => {
-		const getPosts = await fetch(`/api/posts`, {
-			method: 'GET',
-			headers: {
-				Authorization: authHeader(),
-			},
-		});
+		const getPosts = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/posts`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: authHeader(),
+				},
+			}
+		);
 		if (getPosts.status === 200) {
 			const response = await getPosts.json();
 			setPosts(response);

@@ -45,14 +45,17 @@ const ProfileForm = ({ setProfileChange, setEditProfile }) => {
 					.required('Password is required'),
 			})}
 			onSubmit={async (values, { setSubmitting }) => {
-				const putUserInfo = await fetch(`/api/profile/${id}`, {
-					method: 'PUT',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: authHeader(),
-					},
-					body: JSON.stringify(values),
-				});
+				const putUserInfo = await fetch(
+					`https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
+					{
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json',
+							Authorization: authHeader(),
+						},
+						body: JSON.stringify(values),
+					}
+				);
 				const response = await putUserInfo.json();
 				if (putUserInfo.status === 401) {
 					return setError(true);

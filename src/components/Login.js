@@ -67,13 +67,16 @@ const Login = () => {
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
 						setLoading(true);
-						const loginPost = await fetch('/auth/login', {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify(values),
-						});
+						const loginPost = await fetch(
+							'https://github.com/ericchi00/Facebook-Clone-Frontend/auth/login',
+							{
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json',
+								},
+								body: JSON.stringify(values),
+							}
+						);
 						if (loginPost.status === 500) {
 							return setError(true);
 						}

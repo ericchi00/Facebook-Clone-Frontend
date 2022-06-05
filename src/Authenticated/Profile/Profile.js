@@ -31,13 +31,16 @@ const Profile = ({ auth, authHeader }) => {
 	}, [id, profileChange]);
 
 	const getInfo = async () => {
-		const response = await fetch(`/api/profile/${id}`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-		});
+		const response = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+			}
+		);
 		if (response.status === 500) {
 			return navigate('*');
 		}
@@ -49,13 +52,16 @@ const Profile = ({ auth, authHeader }) => {
 	};
 
 	const getUserPosts = async () => {
-		const getPosts = await fetch(`/api/profile/${id}/posts`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-		});
+		const getPosts = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/profile/${id}/posts`,
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+			}
+		);
 		if (getPosts.status === 200) {
 			const response = await getPosts.json();
 			setUserPosts(response);

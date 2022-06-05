@@ -54,14 +54,17 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 
 			pictureURL = process.env.REACT_APP_S3_URL + randomFileName;
 		}
-		const postPost = await fetch(`/api/posts/${auth().id}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ userPost: post, picture: pictureURL }),
-		});
+		const postPost = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/posts/${auth().id}`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ userPost: post, picture: pictureURL }),
+			}
+		);
 		if (postPost.status === 400) {
 			const error = await postPost.json();
 			setErrorMessage(error.errors[0].msg);

@@ -68,14 +68,19 @@ const Upload = ({ setEditPicture }) => {
 
 		const s3URL = process.env.REACT_APP_S3_URL + randomFileName;
 
-		const putUserPicture = await fetch(`/api/profile/picture/${auth().id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ picture: s3URL }),
-		});
+		const putUserPicture = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/profile/picture/${
+				auth().id
+			}`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ picture: s3URL }),
+			}
+		);
 
 		if (putUserPicture.status !== 200) {
 			console.error(new Error('An error has occurred while uploading'));

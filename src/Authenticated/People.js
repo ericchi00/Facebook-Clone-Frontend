@@ -18,12 +18,15 @@ const People = ({ auth, authHeader }) => {
 	}, []);
 
 	const getUsers = async () => {
-		const getUserProfiles = await fetch(`/api/profiles/${auth().id}`, {
-			method: 'GET',
-			headers: {
-				Authorization: authHeader(),
-			},
-		});
+		const getUserProfiles = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/profiles/${auth().id}`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: authHeader(),
+				},
+			}
+		);
 
 		if (getUserProfiles.status === 200) {
 			const response = await getUserProfiles.json();

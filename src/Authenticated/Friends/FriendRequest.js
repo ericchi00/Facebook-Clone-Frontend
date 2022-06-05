@@ -16,25 +16,35 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 	}, [reload]);
 
 	const getFriendRequest = async () => {
-		const getFriendReq = await fetch(`/api/friends/request/${auth().id}`, {
-			method: 'GET',
-			headers: {
-				Authorization: authHeader(),
-			},
-		});
+		const getFriendReq = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/request/${
+				auth().id
+			}`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: authHeader(),
+				},
+			}
+		);
 		const response = await getFriendReq.json();
 		setFriendRequestList(response.friendRequest);
 	};
 
 	const acceptFriendRequest = async (friendID) => {
-		const putFriend = await fetch(`/api/friends/request/${auth().id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: friendID }),
-		});
+		const putFriend = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/request/${
+				auth().id
+			}`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: friendID }),
+			}
+		);
 		if (putFriend.status === 200) {
 			setReload(!reload);
 			setRerender(!rerender);
@@ -42,14 +52,17 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 	};
 
 	const declineFriendRequest = async (friendID) => {
-		const deleteFriendRequest = await fetch(`/api/friends/request`, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: friendID }),
-		});
+		const deleteFriendRequest = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/request`,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: friendID }),
+			}
+		);
 		if (deleteFriendRequest.status === 200) {
 			setReload(true);
 			setRerender(true);

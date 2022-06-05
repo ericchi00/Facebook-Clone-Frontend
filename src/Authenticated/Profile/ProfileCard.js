@@ -45,42 +45,53 @@ const ProfileCard = ({
 	}, [id, isUserProfile]);
 
 	const sendFriendRequest = async () => {
-		const putFriend = await fetch(`/api/friends/request`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: id }),
-		});
+		const putFriend = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/request`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: id }),
+			}
+		);
 		if (putFriend.status === 200) {
 			setPendingRequest(true);
 		}
 	};
 
 	const cancelFriendRequest = async () => {
-		const deleteFriend = await fetch('/api/friends/request', {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: id }),
-		});
+		const deleteFriend = await fetch(
+			'https://backend-facebookclone.herokuapp.com/api/friends/request',
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: id }),
+			}
+		);
 		if (deleteFriend.status === 200) {
 			setPendingRequest(false);
 		}
 	};
 
 	const acceptFriendRequest = async () => {
-		const putFriend = await fetch(`/api/friends/request/${auth().id}`, {
-			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: id }),
-		});
+		const putFriend = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/request/${
+				auth().id
+			}`,
+			{
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: id }),
+			}
+		);
 		if (putFriend.status === 200) {
 			setPendingRequest(false);
 			setIsFriend(true);
@@ -88,14 +99,17 @@ const ProfileCard = ({
 	};
 
 	const removeFriend = async () => {
-		const deleteFriend = await fetch(`/api/friends/${auth().id}`, {
-			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: authHeader(),
-			},
-			body: JSON.stringify({ user: auth().id, friend: id }),
-		});
+		const deleteFriend = await fetch(
+			`https://backend-facebookclone.herokuapp.com/api/friends/${auth().id}`,
+			{
+				method: 'DELETE',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+				body: JSON.stringify({ user: auth().id, friend: id }),
+			}
+		);
 		if (deleteFriend.status === 200) {
 			setIsFriend(false);
 		}

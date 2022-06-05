@@ -54,11 +54,14 @@ const Register = ({ show, onHide, setModalShow }) => {
 							.required('Password is required'),
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
-						const registerPost = await fetch('/auth/register', {
-							method: 'POST',
-							headers: { 'Content-Type': 'application/json' },
-							body: JSON.stringify(values),
-						});
+						const registerPost = await fetch(
+							'https://github.com/ericchi00/Facebook-Clone-Frontend/auth/register',
+							{
+								method: 'POST',
+								headers: { 'Content-Type': 'application/json' },
+								body: JSON.stringify(values),
+							}
+						);
 						const message = await registerPost.json();
 						if ('errors' in message) {
 							setErrors(message.errors);
