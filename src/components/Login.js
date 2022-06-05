@@ -19,7 +19,7 @@ const Login = () => {
 	const demoUser = async () => {
 		setLoading(true);
 		const loginPost = await fetch(
-			'https://infinite-ridge-47874.herokuapp.com/https://github.com/ericchi00/Facebook-Clone-Frontend/auth/login',
+			'https://backend-facebookclone.herokuapp.com/auth/login',
 			{
 				method: 'POST',
 				headers: {
@@ -71,7 +71,7 @@ const Login = () => {
 					onSubmit={async (values, { setSubmitting }) => {
 						setLoading(true);
 						const loginPost = await fetch(
-							'https://infinite-ridge-47874.herokuapp.com/https://github.com/ericchi00/Facebook-Clone-Frontend/auth/login',
+							'https://backend-facebookclone.herokuapp.com/auth/login',
 							{
 								method: 'POST',
 								headers: {
