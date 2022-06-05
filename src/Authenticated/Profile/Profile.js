@@ -16,7 +16,6 @@ const Profile = ({ auth, authHeader }) => {
 	const [profileChange, setProfileChange] = useState(false);
 	const [userPosts, setUserPosts] = useState([]);
 
-	const [style, setStyle] = useState();
 	const checkMobile = useCheckMobileScreen();
 
 	useEffect(() => {
@@ -85,11 +84,11 @@ const Profile = ({ auth, authHeader }) => {
 					className={
 						!checkMobile
 							? 'd-flex justify-content-center'
-							: 'd-flex flex-column'
+							: 'd-flex flex-column align-items-center'
 					}
 					style={{ gap: '1rem' }}
 				>
-					<div>
+					<div className="w-100">
 						<ProfileCard
 							auth={auth}
 							authHeader={authHeader}
@@ -100,7 +99,7 @@ const Profile = ({ auth, authHeader }) => {
 						<Friends auth={auth} authHeader={authHeader} width={'600px'} />
 					</div>
 					{userPosts.length > 0 && (
-						<div style={{ minWidth: '300px' }}>
+						<div className="w-100 d-flex flex-column align-items-center">
 							{userPosts.map((postInfo) => {
 								return (
 									<Post
