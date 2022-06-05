@@ -8,11 +8,41 @@ import { useSignIn } from 'react-auth-kit';
 import InputField from './InputField';
 import Register from './Register';
 import * as Yup from 'yup';
+import Spinner from 'react-bootstrap/Spinner';
 
 const Login = () => {
 	const [error, setError] = useState(false);
 	const [modalShow, setModalShow] = useState(false);
+	const [isLoading, setLoading] = useState(false);
 	const signIn = useSignIn();
+
+	const demoUser = async () => {
+		setLoading(true);
+		const loginPost = await fetch('/auth/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: process.env.REACT_APP_TEST_EMAIL,
+				password: process.env.REACT_APP_TEST_PASSWORD,
+			}),
+		});
+		if (loginPost.status === 500) {
+			return setError(true);
+		}
+		const message = await loginPost.json();
+		if (
+			signIn({
+				token: message.token,
+				expiresIn: message.expiresIn,
+				tokenType: 'Bearer',
+				authState: message.authState,
+			})
+		) {
+		}
+	};
+
 	return (
 		<>
 			<Container
@@ -36,6 +66,7 @@ const Login = () => {
 							.required('Password is required'),
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
+						setLoading(true);
 						const loginPost = await fetch('/auth/login', {
 							method: 'POST',
 							headers: {
@@ -95,8 +126,26 @@ const Login = () => {
 						>
 							Create new account
 						</Button>
-						<Button className="mt-3" variant="warning" type="button">
-							Test drive an existing account!
+						<Button
+							onClick={() => demoUser()}
+							className="mt-3"
+							variant="warning"
+							disabled={isLoading}
+						>
+							{isLoading ? (
+								<>
+									<Spinner
+										as="span"
+										animation="grow"
+										size="sm"
+										role="status"
+										aria-hidden="true"
+									/>
+									Loading...
+								</>
+							) : (
+								'DEMO USER'
+							)}
 						</Button>
 						<Register
 							show={modalShow}
