@@ -2,7 +2,7 @@
 
 This is the front end for Facebook Clone.
 
-https://www.theodinproject.com/lessons/nodejs-blog-api
+[Assignment](https://www.theodinproject.com/lessons/nodejs-odin-book)
 
 [Backend Github](https://github.com/ericchi00/Facebook-Clone-Backend)
 
