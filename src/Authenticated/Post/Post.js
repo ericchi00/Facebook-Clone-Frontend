@@ -74,7 +74,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 
 	return (
 		<Card
-			className="text-light mb-4 w-100"
+			className="text-light mt-4 mb-1 w-100"
 			style={{ background: '#323232', maxWidth: '600px' }}
 		>
 			<Card.Header
