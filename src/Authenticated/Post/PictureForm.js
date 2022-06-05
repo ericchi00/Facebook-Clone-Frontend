@@ -3,14 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 
-const PictureForm = ({
-	auth,
-	authHeader,
-	setShow,
-	setPicture,
-	picture,
-	setDisabled,
-}) => {
+const PictureForm = ({ setShow, setPicture, picture, setDisabled }) => {
 	const [errorMessage, setErrorMessage] = useState('');
 	const [showError, setShowError] = useState(false);
 
