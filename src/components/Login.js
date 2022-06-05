@@ -18,16 +18,19 @@ const Login = () => {
 
 	const demoUser = async () => {
 		setLoading(true);
-		const loginPost = await fetch('/auth/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email: process.env.REACT_APP_TEST_EMAIL,
-				password: process.env.REACT_APP_TEST_PASSWORD,
-			}),
-		});
+		const loginPost = await fetch(
+			'https://infinite-ridge-47874.herokuapp.com/https://github.com/ericchi00/Facebook-Clone-Frontend/auth/login',
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					email: process.env.REACT_APP_TEST_EMAIL,
+					password: process.env.REACT_APP_TEST_PASSWORD,
+				}),
+			}
+		);
 		if (loginPost.status === 500) {
 			return setError(true);
 		}
@@ -68,7 +71,7 @@ const Login = () => {
 					onSubmit={async (values, { setSubmitting }) => {
 						setLoading(true);
 						const loginPost = await fetch(
-							'https://github.com/ericchi00/Facebook-Clone-Frontend/auth/login',
+							'https://infinite-ridge-47874.herokuapp.com/https://github.com/ericchi00/Facebook-Clone-Frontend/auth/login',
 							{
 								method: 'POST',
 								headers: {

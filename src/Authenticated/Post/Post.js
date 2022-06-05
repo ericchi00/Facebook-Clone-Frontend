@@ -23,7 +23,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 
 	const getComments = async () => {
 		const postComment = await fetch(
-			`https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/comments`,
+			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/comments`,
 			{
 				method: 'GET',
 				headers: {
@@ -39,7 +39,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 
 	const handleComment = async () => {
 		const postComment = await fetch(
-			`https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/comments`,
+			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/comments`,
 			{
 				method: 'POST',
 				headers: {
@@ -64,7 +64,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 		if (!userLiked) setLikes(likes + 1);
 		if (userLiked) setLikes(likes - 1);
 		const putPostLike = await fetch(
-			`https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/`,
+			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/`,
 			{
 				method: 'PUT',
 				headers: {

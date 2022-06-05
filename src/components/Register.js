@@ -55,7 +55,7 @@ const Register = ({ show, onHide, setModalShow }) => {
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
 						const registerPost = await fetch(
-							'https://github.com/ericchi00/Facebook-Clone-Frontend/auth/register',
+							'https://infinite-ridge-47874.herokuapp.com/https://github.com/ericchi00/Facebook-Clone-Frontend/auth/register',
 							{
 								method: 'POST',
 								headers: { 'Content-Type': 'application/json' },

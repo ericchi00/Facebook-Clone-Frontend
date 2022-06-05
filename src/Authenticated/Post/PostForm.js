@@ -55,7 +55,9 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 			pictureURL = process.env.REACT_APP_S3_URL + randomFileName;
 		}
 		const postPost = await fetch(
-			`https://backend-facebookclone.herokuapp.com/api/posts/${auth().id}`,
+			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${
+				auth().id
+			}`,
 			{
 				method: 'POST',
 				headers: {
