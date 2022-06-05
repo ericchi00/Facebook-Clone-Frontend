@@ -21,6 +21,7 @@ const Profile = ({ auth, authHeader }) => {
 
 	useEffect(() => {
 		setLoading(true);
+		setProfileChange(false);
 		if (id === auth().id) {
 			setIsUserProfile(true);
 		} else {

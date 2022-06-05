@@ -128,7 +128,12 @@ const ProfileCard = ({
 						setEditProfile={setEditProfile}
 					/>
 				)}
-				{editPicture && <Upload setEditPicture={setEditPicture} />}
+				{editPicture && (
+					<Upload
+						setEditPicture={setEditPicture}
+						setProfileChange={setProfileChange}
+					/>
+				)}
 				{!editPicture && !editProfile && (
 					<>
 						<img
