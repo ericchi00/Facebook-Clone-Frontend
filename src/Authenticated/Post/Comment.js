@@ -10,7 +10,6 @@ const Comment = ({ auth, authHeader, comment }) => {
 	const [userLiked, setUserLiked] = useState(
 		comment.likes.includes(auth().id || false)
 	);
-	const [color, setColor] = useState();
 
 	const handleLikes = async () => {
 		if (userLiked) setLikes(likes - 1);

@@ -12,15 +12,17 @@ import useCheckMobileScreen from '../hooks/useCheckMobileScreen';
 const Home = ({ auth, authHeader }) => {
 	const [loading, setLoading] = useState(true);
 	const [posts, setPosts] = useState([]);
-	const checkMobile = useCheckMobileScreen();
-	const isAuthenticated = useIsAuthenticated();
 	const [newPost, setNewPost] = useState(false);
+
+	const isAuthenticated = useIsAuthenticated();
+	const checkMobile = useCheckMobileScreen();
 
 	useEffect(() => {
 		document.title = 'Facebook Clone';
 		if (isAuthenticated()) {
 			getAllPosts();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [newPost, isAuthenticated()]);
 
 	const getAllPosts = async () => {

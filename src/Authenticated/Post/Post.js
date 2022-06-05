@@ -10,9 +10,9 @@ import { ReactComponent as CommentIcon } from '../../assets/comment.svg';
 import { formatDistanceToNow } from 'date-fns';
 
 const Post = ({ auth, authHeader, postInfo }) => {
+	const [commentList, setCommentList] = useState(postInfo.comments);
 	const [comment, setComment] = useState();
 	const [newComment, setNewComment] = useState(false);
-	const [commentList, setCommentList] = useState(postInfo.comments);
 	const [showCommentBox, setShowCommentBox] = useState(false);
 	const [error, setError] = useState(false);
 
@@ -44,8 +44,6 @@ const Post = ({ auth, authHeader, postInfo }) => {
 			body: JSON.stringify({ name: auth().id, text: comment }),
 		});
 		if (postComment.status === 400) {
-			const response = await postComment.json();
-			console.log(response);
 			setError(true);
 		}
 		if (postComment.status === 200) {

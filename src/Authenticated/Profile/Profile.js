@@ -10,6 +10,7 @@ import useCheckMobileScreen from '../../hooks/useCheckMobileScreen';
 const Profile = ({ auth, authHeader }) => {
 	const { id } = useParams();
 	const navigate = useNavigate();
+
 	const [info, setInfo] = useState('');
 	const [loading, setLoading] = useState(true);
 	const [isUserProfile, setIsUserProfile] = useState(false);

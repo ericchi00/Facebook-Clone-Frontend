@@ -41,7 +41,6 @@ const People = ({ auth, authHeader }) => {
 					gap: '1rem',
 				}}
 			>
-				{!checkMobile && <UserInfo auth={auth} />}
 				{loading ? (
 					<Container className="d-flex align-items-center justify-content-center">
 						<Spinner
@@ -58,26 +57,28 @@ const People = ({ auth, authHeader }) => {
 						</Spinner>
 					</Container>
 				) : (
-					<ListGroup
-						className="w-100 mt-4 mb-4 rounded"
-						variant="flush"
-						style={{ maxWidth: '600px' }}
-					>
-						{users.map((user) => {
-							return (
-								<PeopleItem
-									key={user._id}
-									user={user}
-									auth={auth}
-									authHeader={authHeader}
-								/>
-							);
-						})}
-					</ListGroup>
-				)}
-
-				{!checkMobile && (
-					<Friends auth={auth} authHeader={authHeader} width={'300px'} />
+					<>
+						{!checkMobile && <UserInfo auth={auth} />}
+						<ListGroup
+							className="w-100 mt-4 mb-4 rounded"
+							variant="flush"
+							style={{ maxWidth: '600px' }}
+						>
+							{users.map((user) => {
+								return (
+									<PeopleItem
+										key={user._id}
+										user={user}
+										auth={auth}
+										authHeader={authHeader}
+									/>
+								);
+							})}
+						</ListGroup>
+						{!checkMobile && (
+							<Friends auth={auth} authHeader={authHeader} width={'300px'} />
+						)}
+					</>
 				)}
 			</Container>
 		</>

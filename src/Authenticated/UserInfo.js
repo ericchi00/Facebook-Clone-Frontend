@@ -8,9 +8,9 @@ import { useSignOut } from 'react-auth-kit';
 const className = 'text-light d-flex align-items-center justify-content-center';
 
 const UserInfo = ({ auth }) => {
+	const fullName = auth().firstName + ' ' + auth().lastName;
 	const id = auth().id;
 	const signOut = useSignOut();
-	const fullName = auth().firstName + ' ' + auth().lastName;
 
 	return (
 		<Container
