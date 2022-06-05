@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
+import { useNavigate } from 'react-router-dom';
 
 AWS.config.update({
 	accessKeyId: process.env.REACT_APP_ACCESS,
@@ -26,6 +27,8 @@ const Upload = ({ setEditPicture }) => {
 
 	const authHeader = useAuthHeader();
 	const auth = useAuthUser();
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		checkFile();
@@ -97,7 +100,7 @@ const Upload = ({ setEditPicture }) => {
 		setLoading(true);
 		// set timeout as picture won't update if page is reloaded instantly
 		setTimeout(() => {
-			window.location.reload();
+			navigate(`/profile/${auth().id}`);
 		}, 2000);
 	};
 
