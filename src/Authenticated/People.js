@@ -19,7 +19,7 @@ const People = ({ auth, authHeader }) => {
 
 	const getUsers = async () => {
 		const getUserProfiles = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profiles/${
+			`https://backend-facebookclone.herokuapp.com/api/profiles/${
 				auth().id
 			}`,
 			{

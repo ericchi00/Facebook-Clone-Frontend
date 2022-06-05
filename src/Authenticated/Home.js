@@ -27,7 +27,7 @@ const Home = ({ auth, authHeader }) => {
 
 	const getAllPosts = async () => {
 		const getPosts = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts`,
+			`https://backend-facebookclone.herokuapp.com/api/posts`,
 			{
 				method: 'GET',
 				headers: {

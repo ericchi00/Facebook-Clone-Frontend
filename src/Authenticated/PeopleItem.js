@@ -26,7 +26,7 @@ const PeopleItem = ({ auth, user, authHeader }) => {
 
 	const sendFriendRequest = async () => {
 		const putFriend = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request`,
+			`https://backend-facebookclone.herokuapp.com/api/friends/request`,
 			{
 				method: 'PUT',
 				headers: {
@@ -43,9 +43,7 @@ const PeopleItem = ({ auth, user, authHeader }) => {
 
 	const removeFriend = async () => {
 		const deleteFriend = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/${
-				auth().id
-			}`,
+			`https://backend-facebookclone.herokuapp.com/api/friends/${auth().id}`,
 			{
 				method: 'DELETE',
 				headers: {
@@ -62,7 +60,7 @@ const PeopleItem = ({ auth, user, authHeader }) => {
 
 	const cancelFriendRequest = async () => {
 		const deleteFriend = await fetch(
-			'https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request',
+			'https://backend-facebookclone.herokuapp.com/api/friends/request',
 			{
 				method: 'DELETE',
 				headers: {

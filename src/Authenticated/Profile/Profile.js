@@ -32,7 +32,7 @@ const Profile = ({ auth, authHeader }) => {
 
 	const getInfo = async () => {
 		const response = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
+			`https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
 			{
 				method: 'GET',
 				headers: {
@@ -53,7 +53,7 @@ const Profile = ({ auth, authHeader }) => {
 
 	const getUserPosts = async () => {
 		const getPosts = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}/posts`,
+			`https://backend-facebookclone.herokuapp.com/api/profile/${id}/posts`,
 			{
 				method: 'GET',
 				headers: {

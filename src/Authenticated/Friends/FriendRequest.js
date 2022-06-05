@@ -17,7 +17,7 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 
 	const getFriendRequest = async () => {
 		const getFriendReq = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request/${
+			`https://backend-facebookclone.herokuapp.com/api/friends/request/${
 				auth().id
 			}`,
 			{
@@ -33,7 +33,7 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 
 	const acceptFriendRequest = async (friendID) => {
 		const putFriend = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request/${
+			`https://backend-facebookclone.herokuapp.com/api/friends/request/${
 				auth().id
 			}`,
 			{

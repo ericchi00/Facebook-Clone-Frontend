@@ -55,9 +55,7 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 			pictureURL = process.env.REACT_APP_S3_URL + randomFileName;
 		}
 		const postPost = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${
-				auth().id
-			}`,
+			`https://backend-facebookclone.herokuapp.com/api/posts/${auth().id}`,
 			{
 				method: 'POST',
 				headers: {
@@ -73,7 +71,10 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 			setError(true);
 		}
 		if (postPost.status === 200) {
-			setNewPost(!newPost);
+			//set small delay to account for aws image upload
+			setTimeout(() => {
+				setNewPost(!newPost);
+			}, 1000);
 		}
 		document.getElementById('post-submission').reset();
 		setShow(false);

@@ -20,7 +20,7 @@ const FriendsList = ({ auth, authHeader, rerender }) => {
 
 	const getFriends = async () => {
 		const getAllFriends = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/${userID}`,
+			`https://backend-facebookclone.herokuapp.com/api/friends/${userID}`,
 			{
 				method: 'GET',
 				headers: {

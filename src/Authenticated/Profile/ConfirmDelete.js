@@ -9,9 +9,7 @@ const ConfirmDelete = ({ show, setShow, auth, authHeader }) => {
 	const navigate = useNavigate();
 	const deleteAccount = async () => {
 		const deleteFriend = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${
-				auth().id
-			}`,
+			`https://backend-facebookclone.herokuapp.com/api/profile/${auth().id}`,
 			{
 				method: 'DELETE',
 				headers: {
