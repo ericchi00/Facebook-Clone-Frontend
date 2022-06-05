@@ -37,3 +37,6 @@ Users can view profile and display list of friends and if user made any posts
 ## Icons
 
 Icons are from [Bootstrap Icons](https://icons.getbootstrap.com/)
+
+
+[Live Demo](https://ericchi00.github.io/Facebook-Clone-Frontend/)
