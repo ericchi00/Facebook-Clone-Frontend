@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/facebook-clone-frontend/static/css/main.e7720ab7.css",
-    "main.js": "/facebook-clone-frontend/static/js/main.3357f4a3.js",
-    "index.html": "/facebook-clone-frontend/index.html",
-    "static/media/profile.svg": "/facebook-clone-frontend/static/media/profile.4696c152d2ee1a31454a371c8d560a65.svg",
-    "static/media/github.svg": "/facebook-clone-frontend/static/media/github.64a993f66a8b88f9aa27874fedc98a3a.svg",
-    "static/media/profilepic.svg": "/facebook-clone-frontend/static/media/profilepic.b5219f1d3c8ad3936572bba6cc0ca033.svg",
-    "static/media/decline.svg": "/facebook-clone-frontend/static/media/decline.ab52cece178740a51edb7efa83ec7faa.svg",
-    "static/media/accept.svg": "/facebook-clone-frontend/static/media/accept.3595fc73a932511635ef6e573b00aee6.svg",
-    "static/media/comment.svg": "/facebook-clone-frontend/static/media/comment.86bd5eafa3e047ca0902dc7f8df95dee.svg",
-    "static/media/editprofile.svg": "/facebook-clone-frontend/static/media/editprofile.eda96e0e64f1027763c0ea5936d78be0.svg",
-    "static/media/facebook.svg": "/facebook-clone-frontend/static/media/facebook.69897f064f839b31bc431bf3bcafd3cb.svg",
-    "static/media/addfriend.svg": "/facebook-clone-frontend/static/media/addfriend.bef3f199b767e7e800d7097bddaca8f4.svg",
-    "main.e7720ab7.css.map": "/facebook-clone-frontend/static/css/main.e7720ab7.css.map",
-    "main.3357f4a3.js.map": "/facebook-clone-frontend/static/js/main.3357f4a3.js.map"
+    "main.css": "/Facebook-Clone-Frontend/static/css/main.e7720ab7.css",
+    "main.js": "/Facebook-Clone-Frontend/static/js/main.11e2ed0a.js",
+    "index.html": "/Facebook-Clone-Frontend/index.html",
+    "static/media/profile.svg": "/Facebook-Clone-Frontend/static/media/profile.4696c152d2ee1a31454a371c8d560a65.svg",
+    "static/media/github.svg": "/Facebook-Clone-Frontend/static/media/github.64a993f66a8b88f9aa27874fedc98a3a.svg",
+    "static/media/profilepic.svg": "/Facebook-Clone-Frontend/static/media/profilepic.b5219f1d3c8ad3936572bba6cc0ca033.svg",
+    "static/media/decline.svg": "/Facebook-Clone-Frontend/static/media/decline.ab52cece178740a51edb7efa83ec7faa.svg",
+    "static/media/accept.svg": "/Facebook-Clone-Frontend/static/media/accept.3595fc73a932511635ef6e573b00aee6.svg",
+    "static/media/comment.svg": "/Facebook-Clone-Frontend/static/media/comment.86bd5eafa3e047ca0902dc7f8df95dee.svg",
+    "static/media/editprofile.svg": "/Facebook-Clone-Frontend/static/media/editprofile.eda96e0e64f1027763c0ea5936d78be0.svg",
+    "static/media/facebook.svg": "/Facebook-Clone-Frontend/static/media/facebook.69897f064f839b31bc431bf3bcafd3cb.svg",
+    "static/media/addfriend.svg": "/Facebook-Clone-Frontend/static/media/addfriend.bef3f199b767e7e800d7097bddaca8f4.svg",
+    "main.e7720ab7.css.map": "/Facebook-Clone-Frontend/static/css/main.e7720ab7.css.map",
+    "main.11e2ed0a.js.map": "/Facebook-Clone-Frontend/static/js/main.11e2ed0a.js.map"
   },
   "entrypoints": [
     "static/css/main.e7720ab7.css",
-    "static/js/main.3357f4a3.js"
+    "static/js/main.11e2ed0a.js"
   ]
 }
