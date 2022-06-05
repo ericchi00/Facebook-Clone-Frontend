@@ -3,13 +3,11 @@ import { useParams } from 'react-router-dom';
 import { ReactComponent as AddFriend } from '../../assets/addfriend.svg';
 import { ReactComponent as ProfilePic } from '../../assets/profilepic.svg';
 import { ReactComponent as EditProfile } from '../../assets/editprofile.svg';
-import { ReactComponent as Delete } from '../../assets/delete.svg';
 import RemoveSvg from '../../assets/RemoveSvg';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ProfileForm from './ProfileForm';
-import ConfirmDelete from './ConfirmDelete';
 import Upload from './Upload';
 
 const ProfileCard = ({
@@ -25,8 +23,6 @@ const ProfileCard = ({
 	const [isFriend, setIsFriend] = useState(false);
 	const [pendingRequest, setPendingRequest] = useState(false);
 	const [acceptButton, setAcceptButton] = useState(false);
-
-	const [show, setShow] = useState(false);
 
 	useEffect(() => {
 		if (!isUserProfile) {
@@ -148,15 +144,6 @@ const ProfileCard = ({
 						{isUserProfile && (
 							<div className="d-flex" style={{ gap: '1rem' }}>
 								<Button
-									variant="outline-danger"
-									className="d-flex align-items-center"
-									style={{ gap: '.3rem' }}
-									onClick={() => setShow(true)}
-								>
-									<Delete />
-									Delete Account
-								</Button>
-								<Button
 									variant="light"
 									onClick={() => setEditProfile(true)}
 									className="d-flex align-items-center"
@@ -219,12 +206,6 @@ const ProfileCard = ({
 					</>
 				)}
 			</Card>
-			<ConfirmDelete
-				show={show}
-				setShow={setShow}
-				auth={auth}
-				authHeader={authHeader}
-			/>
 		</Container>
 	);
 };
