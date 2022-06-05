@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ReactComponent as AddFriend } from '../../assets/addfriend.svg';
-import { ReactComponent as RemoveFriend } from '../../assets/removefriend.svg';
 import { ReactComponent as ProfilePic } from '../../assets/profilepic.svg';
 import { ReactComponent as EditProfile } from '../../assets/editprofile.svg';
 import { ReactComponent as Delete } from '../../assets/delete.svg';
+import RemoveSvg from '../../assets/RemoveSvg';
 import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -165,7 +165,7 @@ const ProfileCard = ({
 								className="d-flex align-items-center"
 								style={{ gap: '.3rem' }}
 							>
-								<RemoveFriend /> Remove Friend
+								<RemoveSvg color="black" /> Remove Friend
 							</Button>
 						)}
 						<div className="d-flex" style={{ gap: '.5rem' }}>
@@ -176,7 +176,7 @@ const ProfileCard = ({
 									className="d-flex align-items-center"
 									style={{ gap: '.3rem' }}
 								>
-									<RemoveFriend /> Accept Friend Request
+									<AddFriend /> Accept Friend Request
 								</Button>
 							)}
 							{!isUserProfile && pendingRequest && (
@@ -186,7 +186,7 @@ const ProfileCard = ({
 									className="d-flex align-items-center"
 									style={{ gap: '.3rem' }}
 								>
-									<RemoveFriend /> Cancel Friend Request
+									<RemoveSvg color="white" /> Cancel Friend Request
 								</Button>
 							)}
 						</div>
