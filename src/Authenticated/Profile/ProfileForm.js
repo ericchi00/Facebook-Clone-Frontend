@@ -46,7 +46,7 @@ const ProfileForm = ({ setProfileChange, setEditProfile }) => {
 			})}
 			onSubmit={async (values, { setSubmitting }) => {
 				const putUserInfo = await fetch(
-					`https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
+					`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
 					{
 						method: 'PUT',
 						headers: {

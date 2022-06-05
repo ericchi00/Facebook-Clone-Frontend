@@ -69,7 +69,7 @@ const Upload = ({ setEditPicture }) => {
 		const s3URL = process.env.REACT_APP_S3_URL + randomFileName;
 
 		const putUserPicture = await fetch(
-			`https://backend-facebookclone.herokuapp.com/api/profile/picture/${
+			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/picture/${
 				auth().id
 			}`,
 			{

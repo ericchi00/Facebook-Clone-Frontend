@@ -15,7 +15,7 @@ const Comment = ({ auth, authHeader, comment }) => {
 		if (userLiked) setLikes(likes - 1);
 		if (!userLiked) setLikes(likes + 1);
 		const putCommentLike = await fetch(
-			`https://backend-facebookclone.herokuapp.com/api/posts/comments/${comment._id}`,
+			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/comments/${comment._id}`,
 			{
 				method: 'PUT',
 				headers: {
