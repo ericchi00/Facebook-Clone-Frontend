@@ -29,11 +29,12 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 	const [disabled, setDisabled] = useState(false);
 	const [post, setPost] = useState('');
 	const [picture, setPicture] = useState();
-	const [errorMessage, setErrorMessage] = useState('');
+	const [errorMessage, setErrorMessage] = useState();
 	const [error, setError] = useState(false);
 	const [show, setShow] = useState(false);
 
 	const handleSubmit = async () => {
+		setError(false);
 		let pictureURL = '';
 
 		if (picture) {
@@ -62,18 +63,19 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 			body: JSON.stringify({ userPost: post, picture: pictureURL }),
 		});
 		if (postPost.status === 400) {
-			setError(true);
 			const error = await postPost.json();
-			setErrorMessage(error);
+			setErrorMessage(error.errors[0].msg);
+			setError(true);
 		}
 		if (postPost.status === 200) {
 			setNewPost(!newPost);
 		}
 		document.getElementById('post-submission').reset();
+		setShow(false);
 	};
 
 	return (
-		<Container fluid="sm mt-4" style={{ maxWidth: '600px', padding: '0' }}>
+		<Container fluid="sm mt-4 mb-4" style={{ maxWidth: '600px', padding: '0' }}>
 			<Form
 				id="post-submission"
 				className="rounded d-flex flex-column p-3"
@@ -105,7 +107,12 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 					/>
 				</Form.Group>
 				<div className="d-flex justify-content-center" style={{ gap: '.5rem' }}>
-					<Button variant="light" onClick={() => setShow(!show)}>
+					<Button
+						variant="light"
+						onClick={() => {
+							setShow(!show);
+						}}
+					>
 						Add Image
 					</Button>
 					<Button
@@ -117,7 +124,11 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 						Submit
 					</Button>
 				</div>
-				{error && <Alert variant="danger">{errorMessage}</Alert>}
+				{error && (
+					<Alert className="mt-2" variant="danger">
+						{errorMessage}
+					</Alert>
+				)}
 				{show && (
 					<PictureForm
 						picture={picture}
