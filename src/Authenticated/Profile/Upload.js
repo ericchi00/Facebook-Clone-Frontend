@@ -17,7 +17,7 @@ const bucket = new AWS.S3({
 	region: process.env.REACT_APP_REGION,
 });
 
-const Upload = ({ setEditPicture, setProfileChange }) => {
+const Upload = ({ profileChange, setEditPicture, setProfileChange }) => {
 	const [file, setFile] = useState();
 	const [disabled, setDisabled] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -98,7 +98,7 @@ const Upload = ({ setEditPicture, setProfileChange }) => {
 		// set timeout as picture won't update if page is reloaded instantly
 		setTimeout(() => {
 			setEditPicture(false);
-			setProfileChange(true);
+			setProfileChange(!profileChange);
 		}, 2000);
 	};
 

@@ -15,6 +15,7 @@ const ProfileCard = ({
 	authHeader,
 	isUserProfile,
 	info,
+	profileChange,
 	setProfileChange,
 }) => {
 	const { id } = useParams();
@@ -124,12 +125,14 @@ const ProfileCard = ({
 			>
 				{editProfile && (
 					<ProfileForm
+						profileChange={profileChange}
 						setProfileChange={setProfileChange}
 						setEditProfile={setEditProfile}
 					/>
 				)}
 				{editPicture && (
 					<Upload
+						profileChange={profileChange}
 						setEditPicture={setEditPicture}
 						setProfileChange={setProfileChange}
 					/>

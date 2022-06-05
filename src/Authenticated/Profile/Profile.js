@@ -102,6 +102,7 @@ const Profile = ({ auth, authHeader }) => {
 							authHeader={authHeader}
 							isUserProfile={isUserProfile}
 							info={info}
+							profileChange={profileChange}
 							setProfileChange={setProfileChange}
 						/>
 						<Friends auth={auth} authHeader={authHeader} width={'600px'} />
