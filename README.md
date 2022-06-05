@@ -8,7 +8,7 @@ https://www.theodinproject.com/lessons/nodejs-blog-api
 
 ## Technologies
 
-HTML, React-Bootstrap, React, Formik (form valiidation), Yup (schema validation), React Auth Kit (Auth Management Library), Date-FNS (time formatting), S3 (storing images)
+HTML, React-Bootstrap, React, Formik (form valiidation), Yup (schema validation), React Auth Kit (Auth Management Library), Date-FNS (time formatting), S3 (storing images), Single Page Apps for GitHub Pages (fixes router links, by rafgraph)
 
 ## Features
 
