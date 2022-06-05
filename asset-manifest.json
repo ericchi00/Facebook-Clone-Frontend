@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Facebook-Clone-Frontend/static/css/main.e7720ab7.css",
-    "main.js": "/Facebook-Clone-Frontend/static/js/main.04eb4cf9.js",
+    "main.js": "/Facebook-Clone-Frontend/static/js/main.331c3b71.js",
     "index.html": "/Facebook-Clone-Frontend/index.html",
     "static/media/profile.svg": "/Facebook-Clone-Frontend/static/media/profile.4696c152d2ee1a31454a371c8d560a65.svg",
     "static/media/delete.svg": "/Facebook-Clone-Frontend/static/media/delete.97953991a59517f2243b375d2c275472.svg",
@@ -14,10 +14,10 @@
     "static/media/facebook.svg": "/Facebook-Clone-Frontend/static/media/facebook.69897f064f839b31bc431bf3bcafd3cb.svg",
     "static/media/addfriend.svg": "/Facebook-Clone-Frontend/static/media/addfriend.bef3f199b767e7e800d7097bddaca8f4.svg",
     "main.e7720ab7.css.map": "/Facebook-Clone-Frontend/static/css/main.e7720ab7.css.map",
-    "main.04eb4cf9.js.map": "/Facebook-Clone-Frontend/static/js/main.04eb4cf9.js.map"
+    "main.331c3b71.js.map": "/Facebook-Clone-Frontend/static/js/main.331c3b71.js.map"
   },
   "entrypoints": [
     "static/css/main.e7720ab7.css",
-    "static/js/main.04eb4cf9.js"
+    "static/js/main.331c3b71.js"
   ]
 }
