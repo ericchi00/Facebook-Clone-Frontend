@@ -69,7 +69,6 @@ const Login = () => {
 							.required('Password is required'),
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
-						setLoading(true);
 						const loginPost = await fetch(
 							'https://backend-facebookclone.herokuapp.com/auth/login',
 							{
