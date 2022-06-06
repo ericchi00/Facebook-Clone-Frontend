@@ -39,7 +39,7 @@ const People = ({ auth, authHeader }) => {
 		<>
 			<Container
 				fluid="lg"
-				className="d-flex justify-content-between"
+				className="d-flex justify-content-center"
 				style={{
 					gap: '1rem',
 				}}
