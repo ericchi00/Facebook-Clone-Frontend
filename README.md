@@ -28,7 +28,7 @@ Users can make comments on posts
 
 Home feed displays all posts from all users
 
-People tab dispalys all users registered
+People tab displays all users registered
 
 Users can like or unlike posts or comments
 
