@@ -12,6 +12,7 @@ const PeopleItem = ({ auth, user, authHeader }) => {
 	const fullName = user.firstName + ' ' + user.lastName;
 	const [friendRequest, setFriendRequest] = useState(false);
 	const [isFriend, setIsFriend] = useState(false);
+	const [isUser, setIsUser] = useState(false);
 
 	useEffect(() => {
 		if (
@@ -21,6 +22,9 @@ const PeopleItem = ({ auth, user, authHeader }) => {
 			setFriendRequest(true);
 		} else if (user.friends.includes(auth().id)) {
 			setIsFriend(true);
+		}
+		if (user._id === auth().id) {
+			setIsUser(true);
 		}
 	}, []);
 
@@ -96,7 +100,7 @@ const PeopleItem = ({ auth, user, authHeader }) => {
 				/>
 				{fullName}
 			</Button>
-			{!friendRequest && !isFriend && (
+			{!friendRequest && !isFriend && !isUser && (
 				<OverlayTrigger
 					placement="bottom"
 					overlay={<Tooltip>Send friend request</Tooltip>}
