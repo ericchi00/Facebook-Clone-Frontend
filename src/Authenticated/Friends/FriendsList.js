@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import { Link, useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
-import { getFriends } from '../../api/api';
 
 const FriendsList = ({ auth, authHeader, rerender }) => {
 	const { id } = useParams();
@@ -12,14 +11,27 @@ const FriendsList = ({ auth, authHeader, rerender }) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		renderFriends();
+		getFriends();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [rerender, userID]);
 
-	const renderFriends = async () => {
-		const friends = await getFriends(authHeader(), userID);
-		setFriends(friends.friends);
-		setIsLoading(false);
+	const getFriends = async () => {
+		const getAllFriends = await fetch(
+			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/${
+				auth().id
+			}`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: authHeader(),
+				},
+			}
+		);
+		if (getAllFriends.status === 200) {
+			const response = await getAllFriends.json();
+			setFriends(response.friends);
+			setIsLoading(false);
+		}
 	};
 
 	return (

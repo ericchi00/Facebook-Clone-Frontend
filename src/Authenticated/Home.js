@@ -8,7 +8,6 @@ import { useIsAuthenticated } from 'react-auth-kit';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import useCheckMobileScreen from '../hooks/useCheckMobileScreen';
-import { getAllPosts } from '../api/api';
 
 const Home = ({ auth, authHeader }) => {
 	const [loading, setLoading] = useState(true);
@@ -21,14 +20,26 @@ const Home = ({ auth, authHeader }) => {
 	useEffect(() => {
 		document.title = 'Facebook Clone';
 		if (isAuthenticated()) {
-			renderPosts();
+			getAllPosts();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [newPost, isAuthenticated()]);
 
-	const renderPosts = async () => {
-		setPosts(await getAllPosts(authHeader()));
-		setLoading(false);
+	const getAllPosts = async () => {
+		const getPosts = await fetch(
+			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts`,
+			{
+				method: 'GET',
+				headers: {
+					Authorization: authHeader(),
+				},
+			}
+		);
+		if (getPosts.status === 200) {
+			const response = await getPosts.json();
+			setPosts(response);
+			setLoading(false);
+		}
 	};
 	return (
 		<>
