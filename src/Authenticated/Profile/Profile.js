@@ -26,46 +26,43 @@ const Profile = ({ auth, authHeader }) => {
 		} else {
 			setIsUserProfile(false);
 		}
-		getInfo();
+		getUserInfo();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id, profileChange]);
 
-	const getInfo = async () => {
-		const response = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: authHeader(),
-				},
-			}
-		);
-		if (response.status === 500) {
+	const getUserInfo = async () => {
+		const [userInfo, userPost] = await Promise.all([
+			fetch(
+				`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: authHeader(),
+					},
+				}
+			),
+			fetch(
+				`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}/posts`,
+				{
+					method: 'GET',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: authHeader(),
+					},
+				}
+			),
+		]);
+		if (userInfo.status === 500 || userPost.status === 500) {
 			return navigate('*');
 		}
-		const profileInfo = await response.json();
-		setInfo(profileInfo);
-		document.title = profileInfo.firstName + ' ' + profileInfo.lastName;
-		getUserPosts();
+		const userInfoResponse = await userInfo.json();
+		const userPostResponse = await userPost.json();
+		setInfo(userInfoResponse);
+		setUserPosts(userPostResponse);
+		document.title =
+			userInfoResponse.firstName + ' ' + userInfoResponse.lastName;
 		setLoading(false);
-	};
-
-	const getUserPosts = async () => {
-		const getPosts = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}/posts`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: authHeader(),
-				},
-			}
-		);
-		if (getPosts.status === 200) {
-			const response = await getPosts.json();
-			setUserPosts(response);
-		}
 	};
 
 	return (
