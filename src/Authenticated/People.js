@@ -6,6 +6,7 @@ import PeopleItem from './PeopleItem';
 import UserInfo from './UserInfo';
 import Friends from './Friends/Friends';
 import useCheckMobileScreen from '../hooks/useCheckMobileScreen';
+import apiURL from '../api';
 
 const People = ({ auth, authHeader }) => {
 	const checkMobile = useCheckMobileScreen();
@@ -18,15 +19,12 @@ const People = ({ auth, authHeader }) => {
 	}, []);
 
 	const getUsers = async () => {
-		const getUserProfiles = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profiles`,
-			{
-				method: 'GET',
-				headers: {
-					Authorization: authHeader(),
-				},
-			}
-		);
+		const getUserProfiles = await fetch(apiURL + `/api/profiles`, {
+			method: 'GET',
+			headers: {
+				Authorization: authHeader(),
+			},
+		});
 
 		if (getUserProfiles.status === 200) {
 			const response = await getUserProfiles.json();
