@@ -37,7 +37,7 @@ const FriendsList = ({ auth, authHeader, rerender }) => {
 	return (
 		<>
 			{isLoading ? (
-				<Container className="d-flex justify-content-center">
+				<Container className="d-flex justify-content-center h-auto p-5">
 					<Spinner
 						animation="border"
 						variant="light"
@@ -45,7 +45,6 @@ const FriendsList = ({ auth, authHeader, rerender }) => {
 						style={{
 							width: '4rem',
 							height: '4rem',
-							marginTop: '10rem',
 						}}
 					>
 						<span className="visually-hidden">Loading...</span>
