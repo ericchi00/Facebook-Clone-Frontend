@@ -53,7 +53,7 @@ const Login = () => {
 				className="d-flex flex-column align-items-center justify-content-center"
 				style={{ margin: 'auto 0' }}
 			>
-				<h2 className="text-light">Facebook Clone</h2>
+				<h2 className="text-light">One Piece FaceBook</h2>
 				<Formik
 					initialValues={{
 						email: '',

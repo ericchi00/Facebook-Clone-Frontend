@@ -19,7 +19,7 @@ const Header = ({ auth, authHeader }) => {
 				<Navbar.Brand as={Link} to="/" style={{ color: '#fff', gap: '.5rem' }}>
 					<FaceBookIcon />
 					<Navbar.Text style={{ paddingLeft: '1rem', color: '#fff' }}>
-						Facebook Clone
+						One Piece FaceBook
 					</Navbar.Text>
 				</Navbar.Brand>
 				<NavDropdown

@@ -18,7 +18,7 @@ const Home = ({ auth, authHeader }) => {
 	const checkMobile = useCheckMobileScreen();
 
 	useEffect(() => {
-		document.title = 'Facebook Clone';
+		document.title = 'One Piece FaceBook';
 		if (isAuthenticated()) {
 			getAllPosts();
 		}
