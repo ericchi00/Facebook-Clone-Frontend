@@ -70,6 +70,7 @@
 		"@babel/plugin-transform-runtime": "^7.18.2",
 		"babel-jest": "^28.1.0",
 		"gh-pages": "^4.0.0",
-		"jest-svg-transformer": "^1.0.0"
+		"jest-svg-transformer": "^1.0.0",
+		"nock": "^13.2.8"
 	}
 }
