@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import LikeSvg from '../../assets/LikeSvg';
 import { ReactComponent as CommentIcon } from '../../assets/comment.svg';
 import { formatDistanceToNow } from 'date-fns';
+import apiURL from '../../api';
 
 const Post = ({ auth, authHeader, postInfo }) => {
 	const [commentList, setCommentList] = useState(postInfo.comments);
@@ -23,7 +24,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 
 	const getComments = async () => {
 		const postComment = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/comments`,
+			apiURL + `/api/posts/${postInfo._id}/comments`,
 			{
 				method: 'GET',
 				headers: {
@@ -39,7 +40,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 
 	const handleComment = async () => {
 		const postComment = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/comments`,
+			apiURL + `/api/posts/${postInfo._id}/comments`,
 			{
 				method: 'POST',
 				headers: {
@@ -63,17 +64,14 @@ const Post = ({ auth, authHeader, postInfo }) => {
 	const handleLikes = async () => {
 		if (!userLiked) setLikes(likes + 1);
 		if (userLiked) setLikes(likes - 1);
-		const putPostLike = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${postInfo._id}/`,
-			{
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: authHeader(),
-				},
-				body: JSON.stringify({ name: auth().id }),
-			}
-		);
+		const putPostLike = await fetch(apiURL + `/api/posts/${postInfo._id}/`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ name: auth().id }),
+		});
 		if (putPostLike.status === 200) {
 			setUserLiked(!userLiked);
 		}
@@ -81,7 +79,7 @@ const Post = ({ auth, authHeader, postInfo }) => {
 
 	return (
 		<Card
-			className="text-light mb-4 w-100"
+			className="text-light mt-4 w-100"
 			style={{ background: '#323232', maxWidth: '600px' }}
 		>
 			<Card.Header

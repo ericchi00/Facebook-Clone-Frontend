@@ -6,6 +6,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { ReactComponent as AddFriend } from '../assets/addfriend.svg';
 import RemoveSvg from '../assets/RemoveSvg';
+import apiURL from '../api';
 
 const PeopleItem = ({ auth, user, authHeader }) => {
 	const navigate = useNavigate();
@@ -26,56 +27,46 @@ const PeopleItem = ({ auth, user, authHeader }) => {
 		if (user._id === auth().id) {
 			setIsUser(true);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const sendFriendRequest = async () => {
-		const putFriend = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request`,
-			{
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: authHeader(),
-				},
-				body: JSON.stringify({ user: auth().id, friend: user._id }),
-			}
-		);
+		const putFriend = await fetch(apiURL + `/api/friends/request`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ user: auth().id, friend: user._id }),
+		});
 		if (putFriend.status === 200) {
 			setFriendRequest(!friendRequest);
 		}
 	};
 
 	const removeFriend = async () => {
-		const deleteFriend = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/${
-				auth().id
-			}`,
-			{
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: authHeader(),
-				},
-				body: JSON.stringify({ user: auth().id, friend: user._id }),
-			}
-		);
+		const deleteFriend = await fetch(apiURL + `/api/friends/${auth().id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ user: auth().id, friend: user._id }),
+		});
 		if (deleteFriend.status === 200) {
 			setIsFriend(!isFriend);
 		}
 	};
 
 	const cancelFriendRequest = async () => {
-		const deleteFriend = await fetch(
-			'https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request',
-			{
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: authHeader(),
-				},
-				body: JSON.stringify({ user: auth().id, friend: user._id }),
-			}
-		);
+		const deleteFriend = await fetch(apiURL + '/api/friends/request', {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ user: auth().id, friend: user._id }),
+		});
 		if (deleteFriend.status === 200) {
 			setFriendRequest(!friendRequest);
 		}

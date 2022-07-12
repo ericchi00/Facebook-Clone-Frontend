@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import InputField from '../../components/InputField';
 import { useAuthUser, useAuthHeader, useSignIn } from 'react-auth-kit';
 import { useParams } from 'react-router-dom';
+import apiURL from '../../api';
 
 const ProfileForm = ({ profileChange, setProfileChange, setEditProfile }) => {
 	const { id } = useParams();
@@ -45,17 +46,14 @@ const ProfileForm = ({ profileChange, setProfileChange, setEditProfile }) => {
 					.required('Password is required'),
 			})}
 			onSubmit={async (values, { setSubmitting }) => {
-				const putUserInfo = await fetch(
-					`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
-					{
-						method: 'PUT',
-						headers: {
-							'Content-Type': 'application/json',
-							Authorization: authHeader(),
-						},
-						body: JSON.stringify(values),
-					}
-				);
+				const putUserInfo = await fetch(apiURL + `/api/profile/${id}`, {
+					method: 'PUT',
+					headers: {
+						'Content-Type': 'application/json',
+						Authorization: authHeader(),
+					},
+					body: JSON.stringify(values),
+				});
 				const response = await putUserInfo.json();
 				if (putUserInfo.status === 401) {
 					return setError(true);
@@ -114,11 +112,11 @@ const ProfileForm = ({ profileChange, setProfileChange, setEditProfile }) => {
 						placeholder="Enter your current password"
 					/>
 				</BootstrapForm.Group>
-				{error ? (
+				{error && (
 					<Alert variant="danger" className="p-2">
 						Email is already in use.
 					</Alert>
-				) : null}
+				)}
 				<div className="d-flex justify-content-center" style={{ gap: '1rem' }}>
 					<Button variant="primary" type="submit">
 						Save Changes

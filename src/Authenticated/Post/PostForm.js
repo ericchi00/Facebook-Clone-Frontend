@@ -6,6 +6,7 @@ import PictureForm from './PictureForm';
 import { v4 as uuidv4 } from 'uuid';
 import AWS from 'aws-sdk';
 import Alert from 'react-bootstrap/Alert';
+import apiURL from '../../api';
 
 AWS.config.update({
 	accessKeyId: process.env.REACT_APP_ACCESS,
@@ -54,19 +55,14 @@ const PostForm = ({ auth, authHeader, newPost, setNewPost }) => {
 
 			pictureURL = process.env.REACT_APP_S3_URL + randomFileName;
 		}
-		const postPost = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/${
-				auth().id
-			}`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: authHeader(),
-				},
-				body: JSON.stringify({ userPost: post, picture: pictureURL }),
-			}
-		);
+		const postPost = await fetch(apiURL + `/api/posts/${auth().id}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ userPost: post, picture: pictureURL }),
+		});
 		if (postPost.status === 400) {
 			const error = await postPost.json();
 			setErrorMessage(error.errors[0].msg);

@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import Spinner from 'react-bootstrap/Spinner';
 import { useAuthHeader, useAuthUser } from 'react-auth-kit';
+import apiURL from '../../api';
 
 AWS.config.update({
 	accessKeyId: process.env.REACT_APP_ACCESS,
@@ -69,9 +70,7 @@ const Upload = ({ profileChange, setEditPicture, setProfileChange }) => {
 		const s3URL = process.env.REACT_APP_S3_URL + randomFileName;
 
 		const putUserPicture = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/picture/${
-				auth().id
-			}`,
+			apiURL + `/api/profile/picture/${auth().id}`,
 			{
 				method: 'PUT',
 				headers: {

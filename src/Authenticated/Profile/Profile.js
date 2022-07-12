@@ -6,6 +6,7 @@ import ProfileCard from './ProfileCard';
 import Post from '../Post/Post';
 import Friends from '../Friends/Friends';
 import useCheckMobileScreen from '../../hooks/useCheckMobileScreen';
+import apiURL from '../../api';
 
 const Profile = ({ auth, authHeader }) => {
 	const { id } = useParams();
@@ -32,26 +33,20 @@ const Profile = ({ auth, authHeader }) => {
 
 	const getUserInfo = async () => {
 		const [userInfo, userPost] = await Promise.all([
-			fetch(
-				`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}`,
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: authHeader(),
-					},
-				}
-			),
-			fetch(
-				`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/profile/${id}/posts`,
-				{
-					method: 'GET',
-					headers: {
-						'Content-Type': 'application/json',
-						Authorization: authHeader(),
-					},
-				}
-			),
+			fetch(apiURL + `/api/profile/${id}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+			}),
+			fetch(apiURL + `/api/profile/${id}/posts`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: authHeader(),
+				},
+			}),
 		]);
 		if (userInfo.status === 500 || userPost.status === 500) {
 			return navigate('*');
@@ -65,61 +60,61 @@ const Profile = ({ auth, authHeader }) => {
 		setLoading(false);
 	};
 
-	return (
-		<>
-			{loading ? (
-				<Container className="d-flex align-items-center justify-content-center">
-					<Spinner
-						animation="border"
-						variant="light"
-						role="status"
-						style={{
-							width: '4rem',
-							height: '4rem',
-							marginTop: '10rem',
-						}}
-					>
-						<span className="visually-hidden">Loading...</span>
-					</Spinner>
-				</Container>
-			) : (
-				<Container
-					fluid="lg"
-					className={
-						!checkMobile
-							? 'd-flex justify-content-center'
-							: 'd-flex flex-column align-items-center'
-					}
-					style={{ gap: '1rem' }}
+	if (loading) {
+		return (
+			<Container className="d-flex align-items-center justify-content-center">
+				<Spinner
+					animation="border"
+					variant="light"
+					role="status"
+					style={{
+						width: '4rem',
+						height: '4rem',
+						marginTop: '10rem',
+					}}
 				>
-					<div className="w-100">
-						<ProfileCard
-							auth={auth}
-							authHeader={authHeader}
-							isUserProfile={isUserProfile}
-							info={info}
-							profileChange={profileChange}
-							setProfileChange={setProfileChange}
-						/>
-						<Friends auth={auth} authHeader={authHeader} width={'600px'} />
+					<span className="visually-hidden">Loading...</span>
+				</Spinner>
+			</Container>
+		);
+	} else {
+		return (
+			<Container
+				fluid="lg"
+				className={
+					!checkMobile
+						? 'd-flex justify-content-center'
+						: 'd-flex flex-column align-items-center'
+				}
+				style={{ gap: '1rem' }}
+			>
+				<div className="w-100">
+					<ProfileCard
+						auth={auth}
+						authHeader={authHeader}
+						isUserProfile={isUserProfile}
+						info={info}
+						profileChange={profileChange}
+						setProfileChange={setProfileChange}
+					/>
+					<Friends auth={auth} authHeader={authHeader} width={'600px'} />
+				</div>
+				{userPosts.length > 0 && (
+					<div className="w-100 d-flex flex-column align-items-center">
+						{userPosts.map((postInfo) => {
+							return (
+								<Post
+									auth={auth}
+									authHeader={authHeader}
+									postInfo={postInfo}
+									key={postInfo._id}
+								/>
+							);
+						})}
 					</div>
-					{userPosts.length > 0 && (
-						<div className="w-100 d-flex flex-column align-items-center">
-							{userPosts.map((postInfo) => {
-								return (
-									<Post
-										auth={auth}
-										authHeader={authHeader}
-										postInfo={postInfo}
-										key={postInfo._id}
-									/>
-								);
-							})}
-						</div>
-					)}
-				</Container>
-			)}
-		</>
-	);
+				)}
+			</Container>
+		);
+	}
 };
 export default Profile;

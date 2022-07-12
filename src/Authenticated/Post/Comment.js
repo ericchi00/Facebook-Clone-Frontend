@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { formatDistanceToNowStrict } from 'date-fns';
 import LikeSvg from '../../assets/LikeSvg';
+import apiURL from '../../api';
 
 const Comment = ({ auth, authHeader, comment }) => {
 	const [likes, setLikes] = useState(comment.likes.length);
@@ -15,7 +16,7 @@ const Comment = ({ auth, authHeader, comment }) => {
 		if (userLiked) setLikes(likes - 1);
 		if (!userLiked) setLikes(likes + 1);
 		const putCommentLike = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/posts/comments/${comment._id}`,
+			apiURL + `/api/posts/comments/${comment._id}`,
 			{
 				method: 'PUT',
 				headers: {
