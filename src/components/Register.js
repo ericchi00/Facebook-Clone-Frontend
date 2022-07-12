@@ -7,6 +7,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import InputField from './InputField';
+import apiURL from '../api';
 
 const Register = ({ show, onHide, setModalShow }) => {
 	const [errors, setErrors] = useState(null);
@@ -54,14 +55,11 @@ const Register = ({ show, onHide, setModalShow }) => {
 							.required('Password is required'),
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
-						const registerPost = await fetch(
-							'https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/auth/register',
-							{
-								method: 'POST',
-								headers: { 'Content-Type': 'application/json' },
-								body: JSON.stringify(values),
-							}
-						);
+						const registerPost = await fetch(apiURL + '/auth/register', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json' },
+							body: JSON.stringify(values),
+						});
 						const message = await registerPost.json();
 						if ('errors' in message) {
 							setErrors(message.errors);

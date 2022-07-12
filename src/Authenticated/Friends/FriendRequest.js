@@ -5,6 +5,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { ReactComponent as Accept } from '../../assets/accept.svg';
 import { ReactComponent as Decline } from '../../assets/decline.svg';
+import apiURL from '../../api';
 
 const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 	const [friendRequestList, setFriendRequestList] = useState([]);
@@ -17,9 +18,7 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 
 	const getFriendRequest = async () => {
 		const getFriendReq = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request/${
-				auth().id
-			}`,
+			apiURL + `/api/friends/request/${auth().id}`,
 			{
 				method: 'GET',
 				headers: {
@@ -33,9 +32,7 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 
 	const acceptFriendRequest = async (friendID) => {
 		const putFriend = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request/${
-				auth().id
-			}`,
+			apiURL + `/api/friends/request/${auth().id}`,
 			{
 				method: 'PUT',
 				headers: {
@@ -52,17 +49,14 @@ const FriendRequest = ({ auth, authHeader, rerender, setRerender }) => {
 	};
 
 	const declineFriendRequest = async (friendID) => {
-		const deleteFriendRequest = await fetch(
-			`https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/api/friends/request`,
-			{
-				method: 'DELETE',
-				headers: {
-					'Content-Type': 'application/json',
-					Authorization: authHeader(),
-				},
-				body: JSON.stringify({ user: auth().id, friend: friendID }),
-			}
-		);
+		const deleteFriendRequest = await fetch(apiURL + `/api/friends/request`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: authHeader(),
+			},
+			body: JSON.stringify({ user: auth().id, friend: friendID }),
+		});
 		if (deleteFriendRequest.status === 200) {
 			setReload(true);
 			setRerender(true);

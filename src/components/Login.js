@@ -9,6 +9,7 @@ import InputField from './InputField';
 import Register from './Register';
 import * as Yup from 'yup';
 import Spinner from 'react-bootstrap/Spinner';
+import apiURL from '../api';
 
 const Login = () => {
 	const [error, setError] = useState(false);
@@ -18,21 +19,20 @@ const Login = () => {
 
 	const demoUser = async () => {
 		setLoading(true);
-		const loginPost = await fetch(
-			'https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/auth/login',
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({
-					email: process.env.REACT_APP_TEST_EMAIL,
-					password: process.env.REACT_APP_TEST_PASSWORD,
-				}),
-			}
-		);
+		const loginPost = await fetch(apiURL + '/auth/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email: process.env.REACT_APP_TEST_EMAIL,
+				password: process.env.REACT_APP_TEST_PASSWORD,
+			}),
+		});
 		if (loginPost.status === 500) {
-			return setError(true);
+			setError(true);
+			setLoading(false);
+			return;
 		}
 		const message = await loginPost.json();
 		if (
@@ -69,16 +69,13 @@ const Login = () => {
 							.required('Password is required'),
 					})}
 					onSubmit={async (values, { setSubmitting }) => {
-						const loginPost = await fetch(
-							'https://infinite-ridge-47874.herokuapp.com/https://backend-facebookclone.herokuapp.com/auth/login',
-							{
-								method: 'POST',
-								headers: {
-									'Content-Type': 'application/json',
-								},
-								body: JSON.stringify(values),
-							}
-						);
+						const loginPost = await fetch(apiURL + 'auth/login', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/json',
+							},
+							body: JSON.stringify(values),
+						});
 						if (loginPost.status === 500) {
 							return setError(true);
 						}
